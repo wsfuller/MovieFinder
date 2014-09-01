@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta name="author" content="Ben Howdle and Dan Matthew">
+    <meta name="description" content="A responsive movie poster grabber">
+    <title>Movie Finder</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body>
+    <section class="navigation">
+        <div class="siteLogo">
+            <h1>
+                Movie Finder
+            </h1>
+        </div>
+        <nav>
+            <div class="movieSearch">
+                <input type="text" placeholder="Find Movies" id="mainSearch" />
+                <button id="search"><i class="fa fa-search"></i></button>
+            </div>
+
+            <div class="tmdbLogo">
+                <a href="https://www.themoviedb.org/" target="_blank">
+                    <img src="images/optimized_theMovieDbLogo.png"/>
+                </a>
+            </div>
+        </nav>
+    </section>
+    <div class="wrapper">
+        <div class="featuredPosterContent">
+            <div id="featuredPoster"></div>
+            <div id="featuredTitle"></div>
+            <div id="featuredSummary"></div>
+        </div>
+
+        <div class="featuredSeatsContainer">
+            <div class="featuredSeats">
+                <div class="featuredGuests"></div>
+            </div>
+        </div>
+
+        <div class="featuredDivider"></div>
+
+        <style>
+            .extraPosters{
+                width: 100%;
+                height: auto;
+                float: left;
+            }
+
+            #posters{
+                max-width: 996px;
+                height: auto;
+                margin: auto;
+            }
+
+            .item{
+                max-width: 225px;
+                margin: 10px 12px;
+                float: left;
+
+            }
+        </style>
+        <div class="extraPosters">
+            <div id="posters"></div>
+        </div>
+
+
+        <div class="push"></div>
+
+    </div>
+
+    <footer>
+        <div class="visible-xs">
+            <div class="tmdbLogo">
+                <a href="https://www.themoviedb.org/" target="_blank">
+                    <img src="images/optimized_theMovieDbLogo.png"/>
+                </a>
+            </div>
+        </div>
+
+    </footer>
+
+
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var url = 'http://api.themoviedb.org/3/',
+                mode = 'search/movie?query=',
+                input,
+                movieName,
+                key = '&api_key=397e7e55abad5eec75d956f74f596140';
+
+        $("#mainSearch").keyup(function(e){
+            var code = e.which;
+            if(code==13){
+                movieFinder();
+            }
+        });
+
+        $('#search').on('click', function() {
+            movieFinder();
+        });
+
+
+        movieFinder = function(){
+            var clearFields = $('#posters, #featuredPoster, #featuredTitle, #featuredSummary');
+            var input = $('#mainSearch').val(),
+                    movieName = encodeURI(input);
+            if (input == ""){
+                return false;
+                console.log(input);
+            }
+
+            $(clearFields).html('');
+
+            $.ajax({
+                type: 'GET',
+                url: url + mode + input + key,
+                async: false,
+                cache: false,
+                jsonpCallback: 'testing',
+                contentType: 'application/json',
+                dataType: 'jsonp',
+                success: function(json) {
+                    jQuery.each(json.results, function (key, val) {
+                        $("#posters").append("<div class='item'>" + "<div class='posterName'>" + json.results[key].title +  "</div>" + "<img  width='225' height='325' src='http://image.tmdb.org/t/p/w500/" + json.results[key].poster_path + "'>" + "</div>");
+                        $('#posters img[src*="null"]').attr('src','images/optimized_noImg.png');
+                        $('#posters .item:empty').parent().hide();
+
+                    });
+                    var firstID = json.results[0].id;
+                    $.ajax({
+                        type: 'GET',
+                        url: url + 'movie/' + firstID + '?' + key,
+                        async: false,
+                        cache: false,
+                        jsonpCallback: 'testing',
+                        contentType: 'application/json',
+                        dataType: 'jsonp',
+                        success: function(json) {
+                            $('#featuredSummary').append("<div class='featSummary'>" + json.overview + "</div>");
+                        },
+                        error: function(e) {}
+                    }).done();
+                },
+                error: function(e) {}
+            }).done(function(){
+                $('.movieSearch').find("input[type=text]").val("");
+                $("#posters img:first").appendTo('#featuredPoster');
+                $('.posterName').first().appendTo('#featuredTitle');
+
+
+                $('.item:first').hide();
+
+
+
+                setTimeout(function() {
+                    var summary = $('.featSummary').text();
+                    if ($('.featSummary').text() == "null"){
+                        $('.featSummary').html("Our apologizes but there does not seem to be an overview related to your search");
+                    }
+                }, 500);
+            });
+        };
+
+
+
+    });
+</script>
+</body>
+</html>
