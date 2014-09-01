@@ -1,0 +1,51 @@
+//
+// Components
+// --------------------------------------------------
+
+
+//
+// Global
+// ---------------------
+*{
+  margin: 0;
+}
+html,body{
+  height: 100%;
+  font-size: 14px;
+}
+body{
+  background-color: #323232;
+  background-image: radial-gradient(center, ellipse cover, #3e3e3e, #2e2e2e);
+  background-image: -ms-radial-gradient(center, ellipse cover, #3e3e3e, #2e2e2e);
+  background-image: -moz-radial-gradient(center, ellipse cover, #3e3e3e, #2e2e2e);
+  background-image: -webkit-radial-gradient(center, ellipse cover, #3e3e3e, #2e2e2e);
+}
+.lambda{
+  padding-left: 0;
+}
+.rho{
+  padding-right: 0;
+}
+.noDisp{
+  display: none;
+}
+
+:focus{
+  outline: 0 !important;
+}
+
+input::-webkit-input-placeholder {
+  color: #717479;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+  color: #717479;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+  color: #717479;
+}
+
+input:-ms-input-placeholder {
+  color: #717479;
+}
