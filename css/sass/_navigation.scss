@@ -45,9 +45,7 @@
       position: relative;
       float: left;
       max-width: 205px;
-      @include break-md{
-        margin-left: 10px;
-      }
+      margin-left: 10px;
       @include break-xs{
         width: 40%;
       }
