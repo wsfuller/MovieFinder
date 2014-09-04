@@ -1,1 +1,1 @@
-Movie Finder is an application that uses <a href="https://www.themoviedb.org/">The Movie Database API</a>.
+Movie Finder is an application that uses <a href="https://www.themoviedb.org/" target="_blank">The Movie Database API</a>.
