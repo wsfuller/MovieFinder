@@ -5,7 +5,7 @@
     <meta name="description" content="A responsive movie poster grabber">
     <title>Movie Finder</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'/>
     <link rel="stylesheet" href="css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 
@@ -22,6 +22,7 @@
                 <input type="text" placeholder="Find Movies" id="mainSearch" />
                 <button id="search"><i class="fa fa-search"></i></button>
             </div>
+            <div id="emptyError">please enter text</div>
 
             <div class="tmdbLogo">
                 <a href="https://www.themoviedb.org/" target="_blank">
@@ -45,26 +46,6 @@
 
         <div class="featuredDivider"></div>
 
-        <style>
-            .extraPosters{
-                width: 100%;
-                height: auto;
-                float: left;
-            }
-
-            #posters{
-                max-width: 996px;
-                height: auto;
-                margin: auto;
-            }
-
-            .item{
-                max-width: 225px;
-                margin: 10px 12px;
-                float: left;
-
-            }
-        </style>
         <div class="extraPosters">
             <div id="posters"></div>
         </div>
@@ -92,6 +73,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
+        $('#emptyError').hide();
         var url = 'http://api.themoviedb.org/3/',
                 mode = 'search/movie?query=',
                 input,
@@ -115,11 +97,14 @@
             var input = $('#mainSearch').val(),
                     movieName = encodeURI(input);
             if (input == ""){
+                $('#mainSearch').css('border-color', '#ff0000');
+                $('#emptyError').slideDown();
                 return false;
-                console.log(input);
             }
 
             $(clearFields).html('');
+            $('#mainSearch').css("border-color", "#4c4f54");
+            $('#emptyError').slideUp();
 
             $.ajax({
                 type: 'GET',
