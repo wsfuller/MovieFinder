@@ -170,6 +170,20 @@ input:-ms-input-placeholder {
       @media only screen and (max-width: 320px) {
         .navigation nav .movieSearch input[type="text"] {
           padding: 8px; } }
+    .navigation nav #emptyError {
+      position: absolute;
+      top: 90%;
+      left: 35px;
+      padding: 2px;
+      background-color: red;
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      color: #fff;
+      font-size: 0.857em;
+      letter-spacing: 0.08em;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      border-radius: 3px; }
     .navigation nav .tmdbLogo {
       width: 175px;
       float: right;
@@ -296,6 +310,19 @@ input:-ms-input-placeholder {
     font-weight: 100;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     line-height: 16px; }
+  .wrapper .extraPosters {
+    width: 100%;
+    height: auto;
+    float: left;
+    margin-bottom: 30px; }
+  .wrapper #posters {
+    max-width: 996px;
+    height: auto;
+    margin: auto; }
+    .wrapper #posters .item {
+      max-width: 225px;
+      margin: 10px 12px;
+      float: left; }
 
 footer {
   display: none;
