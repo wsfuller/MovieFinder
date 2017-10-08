@@ -72,93 +72,102 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $('#emptyError').hide();
-        var url = 'http://api.themoviedb.org/3/',
-                mode = 'search/movie?query=',
-                input,
-                movieName,
-                key = '&api_key=397e7e55abad5eec75d956f74f596140';
+$(document).ready(function() {
+	$('#emptyError').hide();
+	var url = 'https://api.themoviedb.org/3/',
+		mode = 'search/movie?query=',
+		input,
+		movieName,
+		key = '&api_key=397e7e55abad5eec75d956f74f596140';
 
-        $("#mainSearch").keyup(function(e){
-            var code = e.which;
-            if(code==13){
-                movieFinder();
-            }
-        });
+	$('#mainSearch').keyup(function(e) {
+		var code = e.which;
+		if (code == 13) {
+			movieFinder();
+		}
+	});
 
-        $('#search').on('click', function() {
-            movieFinder();
-        });
+	$('#search').on('click', function() {
+		movieFinder();
+	});
 
+	movieFinder = function() {
+		var clearFields = $('#posters, #featuredPoster, #featuredTitle, #featuredSummary');
+		var input = $('#mainSearch').val(),
+			movieName = encodeURI(input);
+		if (input == '') {
+			$('#mainSearch').css('border-color', '#ff0000');
+			$('#emptyError').slideDown();
+			return false;
+		}
 
-        movieFinder = function(){
-            var clearFields = $('#posters, #featuredPoster, #featuredTitle, #featuredSummary');
-            var input = $('#mainSearch').val(),
-                    movieName = encodeURI(input);
-            if (input == ""){
-                $('#mainSearch').css('border-color', '#ff0000');
-                $('#emptyError').slideDown();
-                return false;
-            }
+		$(clearFields).html('');
+		$('#mainSearch').css('border-color', '#4c4f54');
+		$('#emptyError').slideUp();
 
-            $(clearFields).html('');
-            $('#mainSearch').css("border-color", "#4c4f54");
-            $('#emptyError').slideUp();
+		$.ajax({
+			type: 'GET',
+			url: url + mode + input + key,
+			async: false,
+			cache: false,
+			jsonpCallback: 'testing',
+			contentType: 'application/json',
+			dataType: 'jsonp',
+			success: function(json) {
+				jQuery.each(json.results, function(key, val) {
+					$('#posters').append(
+						"<div class='item'>" +
+							"<div class='posterName'>" +
+							json.results[key].title +
+							'</div>' +
+							"<img  width='225' height='325' src='https://image.tmdb.org/t/p/w500/" +
+							json.results[key].poster_path +
+							"'>" +
+							'</div>'
+					);
+					$('#posters img[src*="null"]').attr('src', 'images/optimized_noImg.png');
+					$('#posters .item:empty')
+						.parent()
+						.hide();
+				});
+				var firstID = json.results[0].id;
+				$.ajax({
+					type: 'GET',
+					url: url + 'movie/' + firstID + '?' + key,
+					async: false,
+					cache: false,
+					jsonpCallback: 'testing',
+					contentType: 'application/json',
+					dataType: 'jsonp',
+					success: function(json) {
+						$('#featuredSummary').append("<div class='featSummary'>" + json.overview + '</div>');
+					},
+					error: function(e) {}
+				}).done();
+			},
+			error: function(e) {}
+		}).done(function() {
+			$('.movieSearch')
+				.find('input[type=text]')
+				.val('');
+			$('#posters img:first').appendTo('#featuredPoster');
+			$('.posterName')
+				.first()
+				.appendTo('#featuredTitle');
 
-            $.ajax({
-                type: 'GET',
-                url: url + mode + input + key,
-                async: false,
-                cache: false,
-                jsonpCallback: 'testing',
-                contentType: 'application/json',
-                dataType: 'jsonp',
-                success: function(json) {
-                    jQuery.each(json.results, function (key, val) {
-                        $("#posters").append("<div class='item'>" + "<div class='posterName'>" + json.results[key].title +  "</div>" + "<img  width='225' height='325' src='http://image.tmdb.org/t/p/w500/" + json.results[key].poster_path + "'>" + "</div>");
-                        $('#posters img[src*="null"]').attr('src','images/optimized_noImg.png');
-                        $('#posters .item:empty').parent().hide();
+			$('.item:first').hide();
 
-                    });
-                    var firstID = json.results[0].id;
-                    $.ajax({
-                        type: 'GET',
-                        url: url + 'movie/' + firstID + '?' + key,
-                        async: false,
-                        cache: false,
-                        jsonpCallback: 'testing',
-                        contentType: 'application/json',
-                        dataType: 'jsonp',
-                        success: function(json) {
-                            $('#featuredSummary').append("<div class='featSummary'>" + json.overview + "</div>");
-                        },
-                        error: function(e) {}
-                    }).done();
-                },
-                error: function(e) {}
-            }).done(function(){
-                $('.movieSearch').find("input[type=text]").val("");
-                $("#posters img:first").appendTo('#featuredPoster');
-                $('.posterName').first().appendTo('#featuredTitle');
-
-
-                $('.item:first').hide();
-
-
-
-                setTimeout(function() {
-                    var summary = $('.featSummary').text();
-                    if ($('.featSummary').text() == "null"){
-                        $('.featSummary').html("Our apologizes but there does not seem to be an overview related to your search");
-                    }
-                }, 500);
-            });
-        };
-
-
-
-    });
+			setTimeout(function() {
+				var summary = $('.featSummary').text();
+				if ($('.featSummary').text() == 'null') {
+					$('.featSummary').html(
+						'Our apologizes but there does not seem to be an overview related to your search'
+					);
+				}
+			}, 500);
+		});
+	};
+});
 </script>
 </body>
 </html>
