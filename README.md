@@ -1,2 +1,4 @@
-<a href="http://williamsfuller.com/movieFinder/" target="_blank">Movie Finder</a> 
- is an application that uses <a href="https://www.themoviedb.org/" target="_blank">The Movie Database API</a>.
+# MovieFinder v2
+
+movieFinder is a React + TypeScript + Redux application harnessing the power of The Movie Database API. This is a ground
+up rebuild from the v1 jQuery + HTML5 + Sass application.
