@@ -6,6 +6,9 @@ import Store from './redux/Store';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
+import 'swiper/swiper.min.css';
+import './styles.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={Store}>

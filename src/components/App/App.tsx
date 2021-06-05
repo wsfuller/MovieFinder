@@ -7,6 +7,7 @@ import { darkTheme, lightTheme } from './themes';
 import { getNowPlayingMovies } from '../../redux/movies/moviesActions';
 import { SET_APP_THEME } from '../../redux/appTheme/appTheme.types';
 
+import Section from '../Section';
 import MoviesList from '../MoviesList';
 
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
@@ -31,7 +32,11 @@ const App: React.FC = () => {
   } else if (nowPlaying.error) {
     nowPlayingMovies = 'ERROR';
   } else if (!nowPlaying.isLoading && hasNowPlayingMovies) {
-    nowPlayingMovies = <MoviesList movies={nowPlaying.data.results} />;
+    nowPlayingMovies = (
+      <Section title="Now Playing">
+        <MoviesList movies={nowPlaying.data.results} />
+      </Section>
+    );
   } else if (!nowPlaying.isLoading && !hasNowPlayingMovies) {
     nowPlayingMovies = 'NOW PLAYING EMPTY';
   }
