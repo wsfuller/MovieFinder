@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import Store from './redux/Store';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+
+import 'swiper/swiper.min.css';
+import './styles.css';
 
 ReactDOM.render(
   <React.StrictMode>

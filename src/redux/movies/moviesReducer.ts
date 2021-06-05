@@ -1,39 +1,59 @@
-import { IMovieItem, MoviesDispatchTypes, GET_MOVIES, GET_MOVIES_SUCCESSFUL, GET_MOVIES_FAILED } from './movies.types';
+import { INowPlayingMovies } from './movies';
+import {
+  MoviesDispatchTypes,
+  GET_NOW_PLAYING_MOVIES,
+  GET_NOW_PLAYING_MOVIES_SUCCESSFUL,
+  GET_NOW_PLAYING_MOVIES_FAILED,
+} from './moviesActions.types';
 
 interface IMoviesState {
-  isLoading: boolean;
-  data: IMovieItem[];
-  error: string;
+  nowPlaying: {
+    isLoading: boolean;
+    data: INowPlayingMovies;
+    error: string;
+  };
 }
 
 const initialState: IMoviesState = {
-  isLoading: false,
-  data: [],
-  error: '',
+  nowPlaying: {
+    isLoading: false,
+    data: {} as INowPlayingMovies,
+    error: '',
+  },
 };
 
 const moviesReducer = (state: IMoviesState = initialState, action: MoviesDispatchTypes): IMoviesState => {
   switch (action.type) {
-    case GET_MOVIES: {
+    case GET_NOW_PLAYING_MOVIES: {
       return {
         ...state,
-        isLoading: true,
-        data: initialState.data,
-        error: '',
+        nowPlaying: {
+          isLoading: true,
+          data: initialState.nowPlaying.data,
+          error: initialState.nowPlaying.error,
+        },
       };
     }
-    case GET_MOVIES_SUCCESSFUL: {
+    case GET_NOW_PLAYING_MOVIES_SUCCESSFUL: {
       return {
         ...state,
-        isLoading: false,
-        data: action.payload.data,
+        nowPlaying: {
+          ...state.nowPlaying,
+          isLoading: false,
+          data: {
+            ...action.payload,
+          },
+        },
       };
     }
-    case GET_MOVIES_FAILED: {
+    case GET_NOW_PLAYING_MOVIES_FAILED: {
       return {
         ...state,
-        isLoading: false,
-        error: action.payload,
+        nowPlaying: {
+          ...state.nowPlaying,
+          isLoading: false,
+          error: action.payload,
+        },
       };
     }
     default: {

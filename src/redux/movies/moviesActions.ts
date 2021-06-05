@@ -1,30 +1,43 @@
-import axios from 'axios';
+/* eslint-disable import/prefer-default-export */
+import axios, { AxiosResponse } from 'axios';
 import { Action, Dispatch } from 'redux';
 
-import { MoviesDispatchTypes, GET_MOVIES, GET_MOVIES_SUCCESSFUL, GET_MOVIES_FAILED } from './movies.types';
+import { INowPlayingMovies } from './movies';
 
-const getMovies =
+import {
+  MoviesDispatchTypes,
+  GET_NOW_PLAYING_MOVIES,
+  GET_NOW_PLAYING_MOVIES_SUCCESSFUL,
+  GET_NOW_PLAYING_MOVIES_FAILED,
+} from './moviesActions.types';
+
+export const getNowPlayingMovies =
   () =>
   async (dispatch: Dispatch<MoviesDispatchTypes>): Promise<Action> => {
     try {
-      dispatch({ type: GET_MOVIES });
+      dispatch({ type: GET_NOW_PLAYING_MOVIES });
 
-      const response = await axios.get(
+      const { data }: AxiosResponse<INowPlayingMovies> = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}`
       );
 
       return dispatch({
-        type: GET_MOVIES_SUCCESSFUL,
+        type: GET_NOW_PLAYING_MOVIES_SUCCESSFUL,
         payload: {
-          data: response.data,
+          results: data.results,
+          dates: {
+            maximum: data.dates.maximum,
+            minimum: data.dates.minimum,
+          },
+          page: data.page,
+          total_pages: data.total_pages,
+          total_results: data.total_results,
         },
       });
     } catch (err) {
       return dispatch({
-        type: GET_MOVIES_FAILED,
+        type: GET_NOW_PLAYING_MOVIES_FAILED,
         payload: err.message,
       });
     }
   };
-
-export default getMovies;
