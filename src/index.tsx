@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import SwiperCore, { Navigation } from 'swiper/core';
 
 import Store from './redux/Store';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 import 'swiper/swiper.min.css';
+import 'swiper/components/navigation/navigation.min.css';
 import './styles.css';
+
+SwiperCore.use([Navigation]);
 
 ReactDOM.render(
   <React.StrictMode>
