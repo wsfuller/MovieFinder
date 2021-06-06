@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { batch } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
-import { Stack, Toggle, ThemeProvider } from '@fluentui/react';
+import { Stack, ThemeProvider } from '@fluentui/react';
 
+import useAppStyles from './App.styles';
 import { darkTheme, lightTheme } from './themes';
 import { getNowPlayingMovies, getPopularMovies, getUpcomingMovies } from '../../redux/movies/moviesActions';
-import { SET_APP_THEME } from '../../redux/appTheme/appTheme.types';
-
+import AppBar from '../AppBar';
+import AppFooter from '../AppFooter';
 import Section from '../Section';
 import MoviesCarousel from '../MoviesCarousel';
 
@@ -15,6 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { sortMoviesBy, SortMoviesBy } from '../../utils/helpers';
 
 const App: React.FC = () => {
+  const classes = useAppStyles();
   const appDispatch = useAppDispatch();
   const {
     appTheme: { isDarkMode },
@@ -102,20 +104,19 @@ const App: React.FC = () => {
   }
 
   return (
-    <ThemeProvider applyTo="body" theme={appTheme} className="page-container">
-      <Stack>
+    <ThemeProvider applyTo="body" theme={appTheme} className={classes.root}>
+      <Stack verticalAlign="space-between" className={classes.root}>
         <Stack.Item>
-          <h1>MovieFinder v2</h1>
-          <Toggle
-            label="Enable Dark Mode"
-            onText="Dark Mode"
-            offText="Light Mode"
-            onChange={() => appDispatch({ type: SET_APP_THEME, payload: !isDarkMode })}
-          />
+          <AppBar />
         </Stack.Item>
-        <Stack.Item>{nowPlayingMovies}</Stack.Item>
-        <Stack.Item>{upcomingMovies}</Stack.Item>
-        <Stack.Item>{popularMovies}</Stack.Item>
+        <main className={classes.contentContainer}>
+          <Stack.Item>{nowPlayingMovies}</Stack.Item>
+          <Stack.Item>{upcomingMovies}</Stack.Item>
+          <Stack.Item>{popularMovies}</Stack.Item>
+        </main>
+        <Stack.Item>
+          <AppFooter />
+        </Stack.Item>
       </Stack>
     </ThemeProvider>
   );
