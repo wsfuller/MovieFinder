@@ -1,4 +1,4 @@
-import { INowPlayingMovies, IPopularMovies } from './movies';
+import { INowPlayingMovies, IPopularMovies, IUpcomingMovies } from './movies';
 import {
   MoviesDispatchTypes,
   GET_NOW_PLAYING_MOVIES,
@@ -7,6 +7,9 @@ import {
   GET_POPULAR_MOVIES,
   GET_POPULAR_MOVIES_SUCCESSFUL,
   GET_POPULAR_MOVIES_FAILED,
+  GET_UPCOMING_MOVIES,
+  GET_UPCOMING_MOVIES_SUCCESSFUL,
+  GET_UPCOMING_MOVIES_FAILED,
 } from './moviesActions.types';
 
 interface IMoviesState {
@@ -20,6 +23,11 @@ interface IMoviesState {
     data: IPopularMovies;
     error: string;
   };
+  upcoming: {
+    isLoading: boolean;
+    data: IUpcomingMovies;
+    error: string;
+  };
 }
 
 const initialState: IMoviesState = {
@@ -31,6 +39,11 @@ const initialState: IMoviesState = {
   popular: {
     isLoading: false,
     data: {} as IPopularMovies,
+    error: '',
+  },
+  upcoming: {
+    isLoading: false,
+    data: {} as IUpcomingMovies,
     error: '',
   },
 };
@@ -96,6 +109,38 @@ const moviesReducer = (state: IMoviesState = initialState, action: MoviesDispatc
         ...state,
         popular: {
           ...state.popular,
+          isLoading: false,
+          error: action.payload,
+        },
+      };
+    }
+    case GET_UPCOMING_MOVIES: {
+      return {
+        ...state,
+        upcoming: {
+          isLoading: true,
+          data: initialState.upcoming.data,
+          error: initialState.upcoming.error,
+        },
+      };
+    }
+    case GET_UPCOMING_MOVIES_SUCCESSFUL: {
+      return {
+        ...state,
+        upcoming: {
+          ...state.upcoming,
+          isLoading: false,
+          data: {
+            ...action.payload,
+          },
+        },
+      };
+    }
+    case GET_UPCOMING_MOVIES_FAILED: {
+      return {
+        ...state,
+        upcoming: {
+          ...state.upcoming,
           isLoading: false,
           error: action.payload,
         },
