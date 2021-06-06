@@ -1,18 +1,17 @@
 import { FontWeights } from '@fluentui/react';
 
-const breakpoints = {
-  small: '320',
-  medium: '480',
-  large: '640',
-  xLarge: '1024',
-  xxLarge: '1366',
-  xxxLarge: '1920',
+import { IBreakpoints } from './themes.types';
+
+export const breakpoints: IBreakpoints = {
+  small: 320,
+  medium: 480,
+  large: 640,
+  xLarge: 1024,
+  xxLarge: 1366,
+  xxxLarge: 1920,
 };
 
 export const lightTheme = {
-  breakpoints: {
-    ...breakpoints,
-  },
   fontWeights: {
     ...FontWeights,
   },
@@ -43,9 +42,6 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  breakpoints: {
-    ...breakpoints,
-  },
   fontWeights: {
     ...FontWeights,
   },

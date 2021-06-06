@@ -5,9 +5,6 @@ const useMoviesListStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   image: {
-    // width: '100%',
-    // height: 'auto',
-    // display: 'inline-block',
     borderRadius: theme.effects.roundedCorner6,
   },
 }));

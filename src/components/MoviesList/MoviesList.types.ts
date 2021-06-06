@@ -1,7 +1,7 @@
-import { INowPlayingMovieItem } from '../../redux/movies/movies';
+import { IMovieItem } from '../../redux/movies/movies';
 
 interface IMoviesListProps {
-  movies: INowPlayingMovieItem[];
+  movies: IMovieItem[];
 }
 
 export default IMoviesListProps;

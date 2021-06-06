@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
+import { batch } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 
 import { Stack, Toggle, ThemeProvider } from '@fluentui/react';
 
 import { darkTheme, lightTheme } from './themes';
-import { getNowPlayingMovies } from '../../redux/movies/moviesActions';
+import { getNowPlayingMovies, getPopularMovies } from '../../redux/movies/moviesActions';
 import { SET_APP_THEME } from '../../redux/appTheme/appTheme.types';
 
 import Section from '../Section';
@@ -16,16 +17,21 @@ const App: React.FC = () => {
   const appDispatch = useAppDispatch();
   const {
     appTheme: { isDarkMode },
-    movies: { nowPlaying },
+    movies: { nowPlaying, popular },
   } = useAppSelector((state) => state);
   const appTheme = isDarkMode ? darkTheme : lightTheme;
 
   useEffect(() => {
-    appDispatch(getNowPlayingMovies());
+    batch(() => {
+      appDispatch(getNowPlayingMovies());
+      appDispatch(getPopularMovies());
+    });
   }, [appDispatch]);
 
   let nowPlayingMovies = null;
+  let popularMovies = null;
   const hasNowPlayingMovies = !isEmpty(nowPlaying.data);
+  const hasPopularMovies = !isEmpty(popular.data);
 
   if (nowPlaying.isLoading) {
     nowPlayingMovies = 'LOADING';
@@ -40,6 +46,21 @@ const App: React.FC = () => {
   } else if (!nowPlaying.isLoading && !hasNowPlayingMovies) {
     nowPlayingMovies = 'NOW PLAYING EMPTY';
   }
+
+  if (popular.isLoading) {
+    popularMovies = 'LOADING';
+  } else if (popular.error) {
+    popularMovies = 'ERROR';
+  } else if (!popular.isLoading && hasPopularMovies) {
+    popularMovies = (
+      <Section title="Popular Movies">
+        <MoviesList movies={popular.data.results} />
+      </Section>
+    );
+  } else if (!popular.isLoading && !hasPopularMovies) {
+    popularMovies = 'POPULAR MOVIES EMPTY';
+  }
+
   return (
     <ThemeProvider applyTo="body" theme={appTheme} className="page-container">
       <Stack>
@@ -53,6 +74,7 @@ const App: React.FC = () => {
           />
         </Stack.Item>
         <Stack.Item>{nowPlayingMovies}</Stack.Item>
+        <Stack.Item>{popularMovies}</Stack.Item>
       </Stack>
     </ThemeProvider>
   );
