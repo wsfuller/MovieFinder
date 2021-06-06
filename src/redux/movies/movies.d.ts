@@ -33,6 +33,17 @@ export interface IPopularMovies {
   total_results: number;
 }
 
+export interface IUpcomingMovies {
+  results: IMovieItem[];
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
+  page: number;
+  total_pages: number;
+  total_results: number;
+}
+
 interface IGenreItem {
   id: number;
   name: string;

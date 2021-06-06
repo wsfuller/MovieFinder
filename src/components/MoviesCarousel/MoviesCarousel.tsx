@@ -3,13 +3,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useTheme } from '@fluentui/react';
 
-import IMoviesListProps from './MoviesList.types';
+import IMoviesCarouselProps from './MoviesCarousel.types';
 import MoviePoster from '../MoviePoster';
 
 import { themeSpacingNumber } from '../../utils/helpers';
 import { useBreakpoints } from '../../utils/hooks';
 
-const MoviesList: React.FC<IMoviesListProps> = ({ movies }) => {
+const MoviesCarousel: React.FC<IMoviesCarouselProps> = ({ movies }) => {
   const theme = useTheme();
   const breakpoints = useBreakpoints();
 
@@ -51,4 +51,4 @@ const MoviesList: React.FC<IMoviesListProps> = ({ movies }) => {
   );
 };
 
-export default MoviesList;
+export default MoviesCarousel;

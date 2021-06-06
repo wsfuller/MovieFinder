@@ -1,6 +1,6 @@
 import { makeStyles } from '@fluentui/react';
 
-const useMoviesListStyles = makeStyles((theme) => ({
+const useMoviesCarouselStyles = makeStyles((theme) => ({
   root: {
     overflow: 'auto',
   },
@@ -9,4 +9,4 @@ const useMoviesListStyles = makeStyles((theme) => ({
   },
 }));
 
-export default useMoviesListStyles;
+export default useMoviesCarouselStyles;

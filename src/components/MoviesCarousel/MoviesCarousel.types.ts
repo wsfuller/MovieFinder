@@ -1,7 +1,7 @@
 import { IMovieItem } from '../../redux/movies/movies';
 
-interface IMoviesListProps {
+interface IMoviesCarouselProps {
   movies: IMovieItem[];
 }
 
-export default IMoviesListProps;
+export default IMoviesCarouselProps;

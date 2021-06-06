@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export */
 import themeSpacingNumber from './themeSpacingNumber';
+import { sortMoviesBy, SortMoviesBy } from './sortMoviesBy';
 
-export { themeSpacingNumber };
+export { themeSpacingNumber, sortMoviesBy, SortMoviesBy };
