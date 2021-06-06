@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
-import './styles.css';
+import './index.css';
 
 SwiperCore.use([Navigation]);
 
