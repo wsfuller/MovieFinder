@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import { Stack } from '@fluentui/react';
 
 import { getNowPlayingMovies, getPopularMovies, getUpcomingMovies } from '../../redux/movies/moviesActions';
+import { Loading, Empty, Error } from '../ContentStates';
 import Section from '../Section';
 import MoviesCarousel from '../MoviesCarousel';
 
@@ -34,9 +35,9 @@ const HomeView: React.FC = () => {
   const hasUpcomingMovies = !isEmpty(upcoming.data);
 
   if (nowPlaying.isLoading) {
-    nowPlayingMoviesContent = 'LOADING';
+    nowPlayingMoviesContent = <Loading text="loading now playing movies" />;
   } else if (nowPlaying.error) {
-    nowPlayingMoviesContent = 'ERROR';
+    nowPlayingMoviesContent = <Error />;
   } else if (!nowPlaying.isLoading && hasNowPlayingMovies) {
     const sortedNowPlayingMovies = sortMoviesBy(
       {
@@ -47,13 +48,13 @@ const HomeView: React.FC = () => {
     );
     nowPlayingMoviesContent = <MoviesCarousel movies={sortedNowPlayingMovies} />;
   } else if (!nowPlaying.isLoading && !hasNowPlayingMovies) {
-    nowPlayingMoviesContent = 'NOW PLAYING EMPTY';
+    nowPlayingMoviesContent = <Empty text="Sorry, but no now playing movies to display" />;
   }
 
   if (popular.isLoading) {
-    popularMoviesContent = 'LOADING';
+    popularMoviesContent = <Loading text="loading popular movies" />;
   } else if (popular.error) {
-    popularMoviesContent = 'ERROR';
+    popularMoviesContent = <Error />;
   } else if (!popular.isLoading && hasPopularMovies) {
     const sortedPopularMovies = sortMoviesBy(
       {
@@ -65,13 +66,13 @@ const HomeView: React.FC = () => {
 
     popularMoviesContent = <MoviesCarousel movies={sortedPopularMovies} />;
   } else if (!popular.isLoading && !hasPopularMovies) {
-    popularMoviesContent = 'POPULAR MOVIES EMPTY';
+    popularMoviesContent = <Empty text="Sorry, but no popular movies to display" />;
   }
 
   if (upcoming.isLoading) {
-    upcomingMoviesContent = 'LOADING';
+    upcomingMoviesContent = <Loading text="loading upcoming movies" />;
   } else if (upcoming.error) {
-    upcomingMoviesContent = 'ERROR';
+    upcomingMoviesContent = <Error />;
   } else if (!upcoming.isLoading && hasUpcomingMovies) {
     const sortedUpcomingMovies = sortMoviesBy(
       {
@@ -82,19 +83,19 @@ const HomeView: React.FC = () => {
     );
     upcomingMoviesContent = <MoviesCarousel movies={sortedUpcomingMovies} />;
   } else if (!upcoming.isLoading && !hasUpcomingMovies) {
-    upcomingMoviesContent = 'UPCOMING MOVIES EMPTY';
+    upcomingMoviesContent = <Empty text="Sorry, but no upcoming movies to display" />;
   }
 
   return (
     <Stack>
       <Stack.Item>
-        <Section title="Now Playing Movies">{nowPlayingMoviesContent}</Section>
+        <Section title="Now Playing">{nowPlayingMoviesContent}</Section>
       </Stack.Item>
       <Stack.Item>
-        <Section title="Upcoming Movies">{upcomingMoviesContent}</Section>
+        <Section title="Upcoming">{upcomingMoviesContent}</Section>
       </Stack.Item>
       <Stack.Item>
-        <Section title="Popular Movies">{popularMoviesContent}</Section>
+        <Section title="Popular">{popularMoviesContent}</Section>
       </Stack.Item>
     </Stack>
   );
