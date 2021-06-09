@@ -14,7 +14,7 @@ const Section: React.FC<ISectionProps> = ({ children, title }) => {
   return (
     <Stack as="section" tokens={sectionStackTokens} className={classes.root}>
       <Stack.Item>
-        <Text as="h1" variant="xxLarge">
+        <Text as="h1" variant="xxLargePlus">
           {title}
         </Text>
       </Stack.Item>
