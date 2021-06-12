@@ -1,7 +1,7 @@
 import { IAppTheme, AppThemeDispatchTypes } from './appTheme.types';
 
 const initialState: IAppTheme = {
-  isDarkMode: false,
+  isDarkMode: true,
 };
 
 const appThemeReducer = (state: IAppTheme = initialState, action: AppThemeDispatchTypes): IAppTheme => {
