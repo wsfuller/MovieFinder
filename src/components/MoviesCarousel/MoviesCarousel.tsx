@@ -3,15 +3,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useTheme } from '@fluentui/react';
 
+import useMoviesCarouselStyles from './MoviesCarousel.styles';
 import IMoviesCarouselProps from './MoviesCarousel.types';
 import MoviePoster from '../MoviePoster';
+import { openPanel } from '../../redux/panels/panelsActions';
+import PanelContentTypes from '../../redux/panels/panelContentTypes';
 
 import { themeSpacingNumber } from '../../utils/helpers';
-import { useBreakpoints } from '../../utils/hooks';
+import { useAppDispatch, useBreakpoints } from '../../utils/hooks';
 
 const MoviesCarousel: React.FC<IMoviesCarouselProps> = ({ movies }) => {
   const theme = useTheme();
+  const appDispatch = useAppDispatch();
   const breakpoints = useBreakpoints();
+  const classes = useMoviesCarouselStyles();
 
   return (
     <Swiper
@@ -36,7 +41,11 @@ const MoviesCarousel: React.FC<IMoviesCarouselProps> = ({ movies }) => {
       navigation
     >
       {movies.map((movie) => (
-        <SwiperSlide key={movie.id} className="mySwiper">
+        <SwiperSlide
+          key={movie.id}
+          className={classes.slide}
+          onClick={() => appDispatch(openPanel({ panelContentType: PanelContentTypes.Movie, movieId: movie.id }))}
+        >
           {movie.poster_path && (
             <MoviePoster
               image={{

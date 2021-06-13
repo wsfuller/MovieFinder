@@ -1,8 +1,7 @@
-/* eslint-disable import/prefer-default-export */
 import axios, { AxiosResponse } from 'axios';
 import { Action, Dispatch } from 'redux';
 
-import { INowPlayingMovies, IPopularMovies, IUpcomingMovies } from './movies';
+import { INowPlayingMovies, IPopularMovies, IUpcomingMovies, IMovie } from './movies';
 
 import {
   MoviesDispatchTypes,
@@ -15,6 +14,9 @@ import {
   GET_UPCOMING_MOVIES,
   GET_UPCOMING_MOVIES_SUCCESSFUL,
   GET_UPCOMING_MOVIES_FAILED,
+  GET_MOVIE,
+  GET_MOVIE_SUCCESSFUL,
+  GET_MOVIE_FAILED,
 } from './moviesActions.types';
 
 export const getNowPlayingMovies =
@@ -101,6 +103,28 @@ export const getUpcomingMovies =
     } catch (err) {
       return dispatch({
         type: GET_UPCOMING_MOVIES_FAILED,
+        payload: err.message,
+      });
+    }
+  };
+
+export const getMovie =
+  (movieId: number) =>
+  async (dispatch: Dispatch<MoviesDispatchTypes>): Promise<Action> => {
+    try {
+      dispatch({ type: GET_MOVIE });
+
+      const { data }: AxiosResponse<IMovie> = await axios.get(
+        `${process.env.REACT_APP_API_BASE_URL}movie/${movieId}?api_key=${process.env.REACT_APP_API_KEY}`
+      );
+
+      return dispatch({
+        type: GET_MOVIE_SUCCESSFUL,
+        payload: data,
+      });
+    } catch (err) {
+      return dispatch({
+        type: GET_MOVIE_FAILED,
         payload: err.message,
       });
     }
