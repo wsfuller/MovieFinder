@@ -4,14 +4,14 @@ import isEmpty from 'lodash/isEmpty';
 import { Stack, Text } from '@fluentui/react';
 
 import IMovieDetailsPanelProps from './MovieDetailsPanel.types';
-import useMovieDetailsPanelStyles from './MovieDetailsPanel.styles';
+// import useMovieDetailsPanelStyles from './MovieDetailsPanel.styles';
 import { getMovie } from '../../redux/movies/moviesActions';
 import TopBanner from './TopBanner';
 
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 
 const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
-  const classes = useMovieDetailsPanelStyles();
+  // const classes = useMovieDetailsPanelStyles();
   const appDispatch = useAppDispatch();
   const {
     movies: {

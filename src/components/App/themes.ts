@@ -1,5 +1,4 @@
 import { FontWeights } from '@fluentui/react';
-import { relative } from 'path';
 
 import { IBreakpoints } from './themes.types';
 

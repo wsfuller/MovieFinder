@@ -1,5 +1,4 @@
 import { makeStyles } from '@fluentui/react';
-import { rootCertificates } from 'tls';
 
 const useTopBannerStyles = makeStyles(() => ({
   root: {

@@ -1,6 +1,6 @@
 import { makeStyles } from '@fluentui/react';
 
-const useMovieDetailsPanelStyles = makeStyles((theme) => ({
+const useMovieDetailsPanelStyles = makeStyles(() => ({
   root: {},
 }));
 
