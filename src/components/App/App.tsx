@@ -39,11 +39,6 @@ const App: React.FC = () => {
         type={PanelType.medium}
         onDismiss={() => appDispatch(closePanel())}
         closeButtonAriaLabel="Close"
-        styles={{
-          contentInner: {
-            marginTop: 310,
-          },
-        }}
       >
         <MovieDetailsPanel movieId={panels.movieId} />
       </Panel>

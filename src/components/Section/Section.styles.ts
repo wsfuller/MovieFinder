@@ -9,7 +9,7 @@ const useSectionStyles = makeStyles((theme) => {
     root: {
       width: '100%',
       padding: `${theme.spacing.m} 0`,
-      [breakpoints.printMediaQuery(breakpoints.large)]: {
+      [breakpoints.mediaQuery(breakpoints.large)]: {
         padding: `${theme.spacing.l2} 0 0`,
       },
     },

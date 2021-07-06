@@ -9,7 +9,7 @@ export const breakpoints: IBreakpoints = {
   xLarge: 1024,
   xxLarge: 1366,
   xxxLarge: 1920,
-  printMediaQuery: (breakpoint) => {
+  mediaQuery: (breakpoint) => {
     return `@media(min-width: ${breakpoint}px)`;
   },
 };
