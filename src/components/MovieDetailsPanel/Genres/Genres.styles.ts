@@ -9,7 +9,9 @@ const useGenreStyles = makeStyles((theme) => ({
       li: {
         padding: `0 ${theme.spacing.s1}`,
         listStyle: 'none',
+        whiteSpace: 'nowrap',
         borderRight: `1px solid ${theme.palette.neutralPrimary}`,
+        opacity: 0.5,
       },
       '& :first-child': {
         paddingLeft: 0,
