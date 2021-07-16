@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import SwiperCore, { Navigation } from 'swiper/core';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { initializeIcons } from '@fluentui/react';
 
@@ -15,6 +19,9 @@ import './index.css';
 
 initializeIcons();
 SwiperCore.use([Navigation]);
+dayjs.extend(duration);
+dayjs.extend(localizedFormat);
+dayjs.extend(relativeTime);
 
 ReactDOM.render(
   <React.StrictMode>

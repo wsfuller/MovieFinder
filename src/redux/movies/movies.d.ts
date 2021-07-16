@@ -45,12 +45,13 @@ export interface IMovie extends IMovieItem {
   budget: number;
   genres: IGenreItem[];
   homepage: string | null;
-  imdb_id: string | null;
   production_companies: IProductionCompanyItem[];
   production_countries: IProductionCountryItem[];
   status: string;
   tagline: string | null;
   revenue: number;
+  runtime: number | null;
+  imdb_id: string | null;
 }
 
 export interface INowPlayingMovies {
