@@ -13,6 +13,9 @@ const useMovieDetailsPanelStyles = makeStyles((theme) => {
         padding: `0 ${theme.spacing.l2}`,
       },
     },
+    shimmer: {
+      marginBottom: theme.spacing.m,
+    },
   };
 });
 

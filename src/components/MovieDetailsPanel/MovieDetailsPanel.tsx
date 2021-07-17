@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
-import { Stack } from '@fluentui/react';
+import { Shimmer, ShimmerElementsGroup, ShimmerElementType, Stack } from '@fluentui/react';
 
 import IMovieDetailsPanelProps from './MovieDetailsPanel.types';
 import useMovieDetailsPanelStyles from './MovieDetailsPanel.styles';
@@ -20,7 +20,7 @@ const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
   const appDispatch = useAppDispatch();
   const {
     movies: {
-      selected: { data: movie },
+      selected: { data: movie, isLoading },
     },
   } = useAppSelector((state) => state);
 
@@ -30,9 +30,22 @@ const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
     }
   }, [appDispatch, movieId]);
 
-  let panelContent;
+  let panelContent = null;
 
-  if (!isEmpty(movie)) {
+  if (isLoading) {
+    panelContent = (
+      <Fragment>
+        <Shimmer className={classes.shimmer} shimmerElements={[{ type: ShimmerElementType.line, height: 200 }]} />
+        <Shimmer className={classes.shimmer} />
+        <Shimmer className={classes.shimmer} shimmerElements={[{ type: ShimmerElementType.line, height: 40 }]} />
+        <Shimmer className={classes.shimmer} shimmerElements={[{ type: ShimmerElementType.line, height: 30 }]} />
+        <Shimmer className={classes.shimmer} shimmerElements={[{ type: ShimmerElementType.line, height: 150 }]} />
+        <Shimmer className={classes.shimmer} shimmerElements={[{ type: ShimmerElementType.line, height: 300 }]} />
+      </Fragment>
+    );
+  }
+
+  if (!isEmpty(movie) && !isLoading) {
     panelContent = (
       <Stack>
         <TopBanner movieTitle={movie.title} backdropPath={movie.backdrop_path} />
@@ -66,8 +79,6 @@ const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
         </Stack>
       </Stack>
     );
-  } else {
-    panelContent = null;
   }
 
   return panelContent;

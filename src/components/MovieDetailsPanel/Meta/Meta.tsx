@@ -38,14 +38,14 @@ const Meta: React.FC<IMetaProps> = ({
         verticalAlign="start"
       >
         {/* Left column */}
-        <Stack className="column">
+        <Stack className={classes.column}>
           <MetaItem title="Status" text={status} />
           {runtime && <MetaItem title="Runtime" text={movieRuntime(runtime)} />}
           <MetaItem title="Release" text={dayjs(releaseDate).format('LL')} />
         </Stack>
         <div className={classes.divider} />
         {/* Right column */}
-        <Stack className="column">
+        <Stack className={classes.column}>
           <MetaItem title="Budget" text={`$${budget.toLocaleString()}`} />
           <MetaItem title="Revenue" text={`$${revenue.toLocaleString()}`} />
           <MetaItem
@@ -64,22 +64,22 @@ const Meta: React.FC<IMetaProps> = ({
       </Stack>
       {/* Quick links */}
       <Stack horizontal tokens={{ childrenGap: theme.spacing.m }}>
-        <Stack.Item>
-          {homepage && (
+        {homepage && (
+          <Stack.Item>
             <Link href={homepage} target="_blank">
               <Icon iconName="Website" className={classes.icon} />
               <Icon iconName="NavigateExternalInline" />
             </Link>
-          )}
-        </Stack.Item>
-        <Stack.Item>
-          {imdbId && (
+          </Stack.Item>
+        )}
+        {imdbId && (
+          <Stack.Item>
             <Link href={`https://imdb.com/title/${imdbId}`} target="_blank">
               <SiImdb className={classes.icon} />
               <Icon iconName="NavigateExternalInline" />
             </Link>
-          )}
-        </Stack.Item>
+          </Stack.Item>
+        )}
       </Stack>
     </Stack>
   );

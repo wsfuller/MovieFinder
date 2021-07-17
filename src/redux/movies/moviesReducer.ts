@@ -13,6 +13,7 @@ import {
   GET_MOVIE,
   GET_MOVIE_SUCCESSFUL,
   GET_MOVIE_FAILED,
+  CLEAR_SELECTED_MOVIE,
 } from './moviesActions.types';
 
 interface IMoviesState {
@@ -186,6 +187,16 @@ const moviesReducer = (state: IMoviesState = initialState, action: MoviesDispatc
           ...state.selected,
           isLoading: false,
           error: action.payload,
+        },
+      };
+    }
+    case CLEAR_SELECTED_MOVIE: {
+      return {
+        ...state,
+        selected: {
+          isLoading: false,
+          data: initialState.selected.data,
+          error: initialState.selected.error,
         },
       };
     }

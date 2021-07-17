@@ -17,6 +17,7 @@ import {
   GET_MOVIE,
   GET_MOVIE_SUCCESSFUL,
   GET_MOVIE_FAILED,
+  CLEAR_SELECTED_MOVIE,
 } from './moviesActions.types';
 
 export const getNowPlayingMovies =
@@ -128,4 +129,10 @@ export const getMovie =
         payload: err.message,
       });
     }
+  };
+
+export const clearSelectedMovie =
+  () =>
+  (dispatch: Dispatch<MoviesDispatchTypes>): Action => {
+    return dispatch({ type: CLEAR_SELECTED_MOVIE });
   };

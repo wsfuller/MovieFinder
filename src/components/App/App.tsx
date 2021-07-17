@@ -8,6 +8,7 @@ import AppBar from '../AppBar';
 import AppFooter from '../AppFooter';
 import { HomeView } from '../Views';
 import { closePanel } from '../../redux/panels/panelsActions';
+import { clearSelectedMovie } from '../../redux/movies/moviesActions';
 import MovieDetailsPanel from '../MovieDetailsPanel';
 
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
@@ -38,6 +39,7 @@ const App: React.FC = () => {
         isOpen={panels.isOpen}
         type={PanelType.medium}
         onDismiss={() => appDispatch(closePanel())}
+        onDismissed={() => appDispatch(clearSelectedMovie())}
         closeButtonAriaLabel="Close"
       >
         <MovieDetailsPanel movieId={panels.movieId} />

@@ -16,6 +16,8 @@ export const GET_MOVIE = 'GET_MOVIE';
 export const GET_MOVIE_SUCCESSFUL = 'GET_MOVIE_SUCCESSFUL';
 export const GET_MOVIE_FAILED = 'GET_MOVIE_FAILED';
 
+export const CLEAR_SELECTED_MOVIE = 'CLEAR_SELECTED_MOVIE';
+
 export interface IGetNowPlayingMovies {
   type: typeof GET_NOW_PLAYING_MOVIES;
 }
@@ -72,6 +74,10 @@ export interface IGetMovieFailed {
   payload: string;
 }
 
+export interface IClearSelectedMovie {
+  type: typeof CLEAR_SELECTED_MOVIE;
+}
+
 export type MoviesDispatchTypes =
   | IGetNowPlayingMovies
   | IGetNowPlayingMoviesSuccessful
@@ -84,4 +90,5 @@ export type MoviesDispatchTypes =
   | IGetUpcomingMoviesFailed
   | IGetMovie
   | IGetMovieSuccessful
-  | IGetMovieFailed;
+  | IGetMovieFailed
+  | IClearSelectedMovie;

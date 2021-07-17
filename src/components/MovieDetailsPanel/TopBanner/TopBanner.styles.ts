@@ -3,10 +3,8 @@ import { makeStyles } from '@fluentui/react';
 const useTopBannerStyles = makeStyles(() => {
   return {
     root: {
-      top: 0,
-      left: 0,
-      zIndex: 0,
       width: '100%',
+      minHeight: 250,
       overflow: 'hidden',
     },
     image: {

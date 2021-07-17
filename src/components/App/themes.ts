@@ -69,10 +69,15 @@ const components = {
     styles: {
       commands: {
         position: 'absolute',
-        top: 18,
-        right: 18,
+        top: 12,
+        right: 12,
         margin: 0,
         zIndex: 100,
+        selectors: {
+          button: {
+            margin: 0,
+          },
+        },
       },
       content: {
         padding: 0,
@@ -81,7 +86,7 @@ const components = {
         selectors: {
           button: {
             color: lightPalatte.themeLight,
-            background: '#000000',
+            background: lightPalatte.black,
           },
         },
       },
