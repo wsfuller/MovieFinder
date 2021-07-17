@@ -1,6 +1,6 @@
 import { makeStyles } from '@fluentui/react';
 
-import useBreakpoints from '../../utils/hooks/breakpoints';
+import { useBreakpoints } from '../../utils/hooks';
 
 const useSectionStyles = makeStyles((theme) => {
   const breakpoints = useBreakpoints();

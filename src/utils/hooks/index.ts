@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from './appRedux';
-import useBreakpoints from './breakpoints';
+import useBreakpoints from './useBreakpoints';
+import useWindowSize from './useWindowSize';
 
-export { useAppDispatch, useAppSelector, useBreakpoints };
+export { useAppDispatch, useAppSelector, useBreakpoints, useWindowSize };

@@ -55,6 +55,7 @@ const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
             <Meta
               budget={movie.budget}
               revenue={movie.revenue}
+              productionCompanies={movie.production_companies}
               runtime={movie.runtime}
               releaseDate={movie.release_date}
               status={movie.status}
