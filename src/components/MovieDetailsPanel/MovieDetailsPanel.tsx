@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
-import { Shimmer, ShimmerElementsGroup, ShimmerElementType, Stack } from '@fluentui/react';
+import { Shimmer, ShimmerElementType, Stack } from '@fluentui/react';
 
 import IMovieDetailsPanelProps from './MovieDetailsPanel.types';
 import useMovieDetailsPanelStyles from './MovieDetailsPanel.styles';
