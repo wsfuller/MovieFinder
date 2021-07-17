@@ -68,8 +68,14 @@ const components = {
   Panel: {
     styles: {
       commands: {
-        position: 'relative',
+        position: 'absolute',
+        top: 18,
+        right: 18,
+        margin: 0,
         zIndex: 100,
+      },
+      content: {
+        padding: 0,
       },
       navigation: {
         selectors: {

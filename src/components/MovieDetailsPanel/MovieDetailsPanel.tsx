@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
-import { Stack, Text } from '@fluentui/react';
+import { Stack } from '@fluentui/react';
 
 import IMovieDetailsPanelProps from './MovieDetailsPanel.types';
 import useMovieDetailsPanelStyles from './MovieDetailsPanel.styles';
@@ -34,7 +34,7 @@ const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
 
   if (!isEmpty(movie)) {
     panelContent = (
-      <Stack className={classes.root}>
+      <Stack>
         <TopBanner movieTitle={movie.title} backdropPath={movie.backdrop_path} />
         <Stack className={classes.bodyContent}>
           <Stack.Item>

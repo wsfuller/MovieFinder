@@ -3,7 +3,8 @@ import { makeStyles } from '@fluentui/react';
 const useOverviewStyles = makeStyles((theme) => {
   return {
     root: {
-      marginBottom: theme.spacing.m,
+      marginTop: 0,
+      marginBottom: theme.spacing.l2,
     },
   };
 });

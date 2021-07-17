@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import dayjs from 'dayjs';
 import { SiImdb } from 'react-icons/si';
 
-import { Icon, Link, Stack, Text } from '@fluentui/react';
+import { useTheme, Icon, Link, Stack, Text } from '@fluentui/react';
 
 import IMetaProps from './Meta.types';
 import useMetaStyles from './Meta.styles';
@@ -24,72 +24,65 @@ const Meta: React.FC<IMetaProps> = ({
   const classes = useMetaStyles();
   const size = useWindowSize();
   const breakpoints = useBreakpoints();
+  const theme = useTheme();
 
-  const isStackRootHorizontal = size.width >= breakpoints.large;
+  const isMetaColumnStackHorizontal = size.width >= breakpoints.large;
 
   return (
-    <Stack
-      className={classes.root}
-      horizontal={isStackRootHorizontal}
-      horizontalAlign={isStackRootHorizontal ? 'center' : 'stretch'}
-      verticalAlign="start"
-    >
-      {/* Left column */}
-      <Stack className="column">
-        <MetaItem title="Status" text={status} />
-        {runtime && <MetaItem title="Runtime" text={movieRuntime(runtime)} />}
-        <MetaItem title="Released" text={dayjs(releaseDate).format('LL')} />
+    <Stack className={classes.root}>
+      {/* Meta Item columns */}
+      <Stack
+        className={classes.metaColumnContainer}
+        horizontal={isMetaColumnStackHorizontal}
+        horizontalAlign={isMetaColumnStackHorizontal ? 'center' : 'stretch'}
+        verticalAlign="start"
+      >
+        {/* Left column */}
+        <Stack className="column">
+          <MetaItem title="Status" text={status} />
+          {runtime && <MetaItem title="Runtime" text={movieRuntime(runtime)} />}
+          <MetaItem title="Release" text={dayjs(releaseDate).format('LL')} />
+        </Stack>
+        <div className={classes.divider} />
+        {/* Right column */}
+        <Stack className="column">
+          <MetaItem title="Budget" text={`$${budget.toLocaleString()}`} />
+          <MetaItem title="Revenue" text={`$${revenue.toLocaleString()}`} />
+          <MetaItem
+            title="Produced by"
+            renderText={() => (
+              <Fragment>
+                {productionCompanies.map(({ id, name }) => (
+                  <Text key={id} variant="mediumPlus" as="p" block>
+                    {name}
+                  </Text>
+                ))}
+              </Fragment>
+            )}
+          />
+        </Stack>
       </Stack>
-      <div className={classes.divider} />
-      {/* Right column */}
-      <Stack className="column">
-        <MetaItem title="Budget" text={`$${budget.toLocaleString()}`} />
-        <MetaItem title="Revenue" text={`$${revenue.toLocaleString()}`} />
-        <MetaItem
-          title="Produced by"
-          renderText={() => (
-            <Fragment>
-              {productionCompanies.map(({ id, name }) => (
-                <Text key={id} variant="mediumPlus" as="p" block>
-                  {name}
-                </Text>
-              ))}
-            </Fragment>
+      {/* Quick links */}
+      <Stack horizontal tokens={{ childrenGap: theme.spacing.m }}>
+        <Stack.Item>
+          {homepage && (
+            <Link href={homepage} target="_blank">
+              <Icon iconName="Website" className={classes.icon} />
+              <Icon iconName="NavigateExternalInline" />
+            </Link>
           )}
-        />
+        </Stack.Item>
+        <Stack.Item>
+          {imdbId && (
+            <Link href={`https://imdb.com/title/${imdbId}`} target="_blank">
+              <SiImdb className={classes.icon} />
+              <Icon iconName="NavigateExternalInline" />
+            </Link>
+          )}
+        </Stack.Item>
       </Stack>
     </Stack>
   );
 };
 
 export default Meta;
-
-// {
-//   /* {homepage && (
-//         <Link href={homepage} target="_blank">
-//           <Icon iconName="Website" />
-//           <Icon iconName="NavigateExternalInline" />
-//         </Link>
-//       )}
-//       {imdbId && (
-//         <Link href={`https://imdb.com/title/${imdbId}`} target="_blank">
-//           <SiImdb />
-//           <Icon iconName="NavigateExternalInline" />
-//         </Link>
-//       )} */
-// }
-
-// {
-//   /* Right column */
-// }
-// {
-//   /* <Stack.Item>
-//           <Stack horizontal>
-//
-//           </Stack>
-//
-//           <Stack horizontal>
-//
-//           </Stack>
-//         </Stack.Item> */
-// }

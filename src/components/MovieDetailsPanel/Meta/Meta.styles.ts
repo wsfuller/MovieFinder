@@ -10,12 +10,6 @@ const useMetaStyles = makeStyles((theme) => {
       marginBottom: theme.spacing.l1,
       padding: `${theme.spacing.m} ${theme.spacing.m} ${theme.spacing.s2}`,
       borderTop: `1px solid ${theme.palette.themeDark}`,
-      selectors: {
-        ul: {
-          padding: 0,
-          listStyle: 'none',
-        },
-      },
     },
     column: {
       width: '100%',
@@ -34,9 +28,11 @@ const useMetaStyles = makeStyles((theme) => {
         display: 'flex',
       },
     },
-    leftColumn: {
-      paddingRight: theme.spacing.l1,
-      borderRight: `1px solid ${theme.palette.themeDark}`,
+    metaColumnContainer: {
+      marginBottom: theme.spacing.l1,
+    },
+    icon: {
+      fontSize: theme.fonts.superLarge.fontSize,
     },
   };
 });

@@ -21,6 +21,7 @@ const useMetaItemStyles = makeStyles((theme) => {
       flex: '0 0 35%',
       marginRight: theme.spacing.s1,
       textAlign: 'right',
+      whiteSpace: 'nowrap',
       selectors: {
         p: {
           fontWeight: FontWeights.bold,
