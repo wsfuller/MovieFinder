@@ -10,7 +10,7 @@ const useTopBannerStyles = makeStyles(() => {
       width: '100%',
       minHeight: 180,
       overflow: 'hidden',
-      [breakpoints.mediaQuery(breakpoints.large)]: {
+      [breakpoints.mediaQuery(breakpoints.xLarge)]: {
         minHeight: 350,
       },
     },
