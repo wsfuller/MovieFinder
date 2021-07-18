@@ -6,13 +6,11 @@ const useMovieRatingStyles = makeStyles((theme) => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      // width: 70,
-      // height: 70,
     },
     tooltipTextContainer: {
-      width: '100%',
-      height: '100%',
-      padding: `${theme.spacing.s1} ${theme.spacing.m}`,
+      width: 'auto',
+      height: 'auto',
+      padding: theme.spacing.s1,
       background: '#000000',
     },
     rating: {

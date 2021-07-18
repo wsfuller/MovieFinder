@@ -5,7 +5,6 @@ const useTaglineStyles = makeStyles(() => {
     root: {
       margin: 0,
       fontStyle: 'italic',
-      textAlign: 'center',
     },
   };
 });
