@@ -4,7 +4,7 @@ const useTitleStyles = makeStyles((theme) => {
   return {
     root: {
       display: 'block',
-      marginBottom: theme.spacing.m,
+      marginBottom: theme.spacing.s2,
       ...theme.fonts.xxLarge,
       fontWeight: FontWeights.light,
       overflow: 'hidden',

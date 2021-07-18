@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
-import { Shimmer, ShimmerElementType, Stack } from '@fluentui/react';
+import { useTheme, Shimmer, ShimmerElementType, Stack } from '@fluentui/react';
 
 import IMovieDetailsPanelProps from './MovieDetailsPanel.types';
 import useMovieDetailsPanelStyles from './MovieDetailsPanel.styles';
@@ -11,6 +11,7 @@ import Genres from './Genres';
 import Title from './Title';
 import Tagline from './Tagline';
 import Overview from './Overview';
+import MovieRating from '../MovieRating';
 import Meta from './Meta';
 
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
@@ -18,6 +19,7 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
   const classes = useMovieDetailsPanelStyles();
   const appDispatch = useAppDispatch();
+  const theme = useTheme();
   const {
     movies: {
       selected: { data: movie, isLoading },
@@ -56,11 +58,16 @@ const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
           <Stack.Item>
             <Title title={movie.title} />
           </Stack.Item>
-          {movie.tagline && (
+          <Stack horizontal verticalAlign="center" tokens={{ childrenGap: theme.spacing.m }}>
             <Stack.Item>
-              <Tagline tagline={movie.tagline} />
+              <MovieRating voteAverage={movie.vote_average} voteCount={movie.vote_count} />
             </Stack.Item>
-          )}
+            {movie.tagline && (
+              <Stack.Item>
+                <Tagline tagline={movie.tagline} />
+              </Stack.Item>
+            )}
+          </Stack>
           <Stack.Item>
             <Overview text={movie.overview} />
           </Stack.Item>

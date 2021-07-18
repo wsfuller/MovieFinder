@@ -49,7 +49,7 @@ const Meta: React.FC<IMetaProps> = ({
           <MetaItem title="Budget" text={`$${budget.toLocaleString()}`} />
           <MetaItem title="Revenue" text={`$${revenue.toLocaleString()}`} />
           <MetaItem
-            title="Produced by"
+            title="Producer(s)"
             renderText={() => (
               <Fragment>
                 {productionCompanies.map(({ id, name }) => (

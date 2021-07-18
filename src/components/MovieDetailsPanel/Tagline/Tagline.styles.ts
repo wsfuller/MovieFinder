@@ -3,7 +3,7 @@ import { makeStyles } from '@fluentui/react';
 const useTaglineStyles = makeStyles(() => {
   return {
     root: {
-      marginTop: 0,
+      margin: 0,
       fontStyle: 'italic',
       textAlign: 'center',
     },
