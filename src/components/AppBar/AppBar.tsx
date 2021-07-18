@@ -24,6 +24,7 @@ const AppBar: React.FC = () => {
           label="Enable Dark Mode"
           onText="Dark Mode"
           offText="Light Mode"
+          defaultChecked={isDarkMode}
           onChange={() => appDispatch({ type: SET_APP_THEME, payload: !isDarkMode })}
         />
       </Stack.Item>

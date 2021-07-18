@@ -6,5 +6,5 @@ export interface IBreakpoints {
   xxLarge: number;
   xxxLarge: number;
   /** returns @media(min-width: ${breakpoint}px) */
-  printMediaQuery: (breakpoint: number) => string;
+  mediaQuery: (breakpoint: number) => string;
 }

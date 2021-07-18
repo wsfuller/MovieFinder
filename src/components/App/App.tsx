@@ -1,19 +1,24 @@
 import React from 'react';
 
-import { Stack, ThemeProvider } from '@fluentui/react';
+import { Panel, PanelType, Stack, ThemeProvider } from '@fluentui/react';
 
 import useAppStyles from './App.styles';
 import { darkTheme, lightTheme } from './themes';
 import AppBar from '../AppBar';
 import AppFooter from '../AppFooter';
 import { HomeView } from '../Views';
+import { closePanel } from '../../redux/panels/panelsActions';
+import { clearSelectedMovie } from '../../redux/movies/moviesActions';
+import MovieDetailsPanel from '../MovieDetailsPanel';
 
-import { useAppSelector } from '../../utils/hooks';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 
 const App: React.FC = () => {
   const classes = useAppStyles();
+  const appDispatch = useAppDispatch();
   const {
     appTheme: { isDarkMode },
+    panels,
   } = useAppSelector((state) => state);
   const appTheme = isDarkMode ? darkTheme : lightTheme;
 
@@ -30,6 +35,15 @@ const App: React.FC = () => {
           <AppFooter />
         </Stack.Item>
       </Stack>
+      <Panel
+        isOpen={panels.isOpen}
+        type={PanelType.medium}
+        onDismiss={() => appDispatch(closePanel())}
+        onDismissed={() => appDispatch(clearSelectedMovie())}
+        closeButtonAriaLabel="Close"
+      >
+        <MovieDetailsPanel movieId={panels.movieId} />
+      </Panel>
     </ThemeProvider>
   );
 };

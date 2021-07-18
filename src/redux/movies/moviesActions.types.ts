@@ -1,4 +1,4 @@
-import { INowPlayingMovies, IPopularMovies, IUpcomingMovies } from './movies';
+import { IMovie, INowPlayingMovies, IPopularMovies, IUpcomingMovies } from './movies';
 
 export const GET_NOW_PLAYING_MOVIES = 'GET_NOW_PLAYING_MOVIES';
 export const GET_NOW_PLAYING_MOVIES_SUCCESSFUL = 'GET_NOW_PLAYING_MOVIES_SUCCESSFUL';
@@ -11,6 +11,12 @@ export const GET_POPULAR_MOVIES_FAILED = 'GET_POPULAR_MOVIES_FAILED';
 export const GET_UPCOMING_MOVIES = 'GET_UPCOMING_MOVIES';
 export const GET_UPCOMING_MOVIES_SUCCESSFUL = 'GET_UPCOMING_MOVIES_SUCCESSFUL';
 export const GET_UPCOMING_MOVIES_FAILED = 'GET_UPCOMING_MOVIES_FAILED';
+
+export const GET_MOVIE = 'GET_MOVIE';
+export const GET_MOVIE_SUCCESSFUL = 'GET_MOVIE_SUCCESSFUL';
+export const GET_MOVIE_FAILED = 'GET_MOVIE_FAILED';
+
+export const CLEAR_SELECTED_MOVIE = 'CLEAR_SELECTED_MOVIE';
 
 export interface IGetNowPlayingMovies {
   type: typeof GET_NOW_PLAYING_MOVIES;
@@ -54,6 +60,24 @@ export interface IGetUpcomingMoviesFailed {
   payload: string;
 }
 
+export interface IGetMovie {
+  type: typeof GET_MOVIE;
+}
+
+export interface IGetMovieSuccessful {
+  type: typeof GET_MOVIE_SUCCESSFUL;
+  payload: IMovie;
+}
+
+export interface IGetMovieFailed {
+  type: typeof GET_MOVIE_FAILED;
+  payload: string;
+}
+
+export interface IClearSelectedMovie {
+  type: typeof CLEAR_SELECTED_MOVIE;
+}
+
 export type MoviesDispatchTypes =
   | IGetNowPlayingMovies
   | IGetNowPlayingMoviesSuccessful
@@ -63,4 +87,8 @@ export type MoviesDispatchTypes =
   | IGetPopularMoviesFailed
   | IGetUpcomingMovies
   | IGetUpcomingMoviesSuccessful
-  | IGetUpcomingMoviesFailed;
+  | IGetUpcomingMoviesFailed
+  | IGetMovie
+  | IGetMovieSuccessful
+  | IGetMovieFailed
+  | IClearSelectedMovie;

@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import { Stack } from '@fluentui/react';
 
 import { getNowPlayingMovies, getPopularMovies, getUpcomingMovies } from '../../redux/movies/moviesActions';
+
 import { Loading, Empty, Error } from '../ContentStates';
 import Section from '../Section';
 import MoviesCarousel from '../MoviesCarousel';
