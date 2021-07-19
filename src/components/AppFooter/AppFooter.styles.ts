@@ -25,7 +25,7 @@ const useAppFooterStyles = makeStyles((theme) => {
     },
     tmdbLogoLink: {
       display: 'block',
-      maxWidth: 100,
+      maxWidth: 60,
     },
   };
 });
