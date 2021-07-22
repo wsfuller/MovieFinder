@@ -13,8 +13,7 @@ const useAppBarStyles = makeStyles((theme) => {
       color: theme.palette.themeDarker,
     },
     appLogo: {
-      display: 'inline-block',
-      marginRight: 5,
+      maxWidth: 200,
     },
   };
 });
