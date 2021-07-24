@@ -15,6 +15,14 @@ const useAppBarStyles = makeStyles((theme) => {
     appLogo: {
       maxWidth: 200,
     },
+    gitHubLink: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 32,
+      height: 32,
+      ...theme.fonts.large,
+    },
   };
 });
 

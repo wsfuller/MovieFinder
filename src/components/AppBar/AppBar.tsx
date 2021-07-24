@@ -1,6 +1,7 @@
 import React from 'react';
+import { AiOutlineGithub } from 'react-icons/ai';
 
-import { Stack } from '@fluentui/react';
+import { Link, Stack } from '@fluentui/react';
 
 import useAppBarStyles from './AppBar.styles';
 import Settings from './Settings';
@@ -22,9 +23,11 @@ const AppBar: React.FC = () => {
           <img className={classes.appLogo} src={appLogo} alt="movie finder logo" />
         </Stack.Item>
         <Stack.Item>
-          <Stack horizontal>
+          <Stack horizontal horizontalAlign="center">
             <Settings />
-            {/* <AppMoreInfo /> */}
+            <Link className={classes.gitHubLink} href="https://github.com/wsfuller/MovieFinder" target="_blank">
+              <AiOutlineGithub />
+            </Link>
           </Stack>
         </Stack.Item>
       </Stack>
