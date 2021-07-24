@@ -13,8 +13,15 @@ const useAppBarStyles = makeStyles((theme) => {
       color: theme.palette.themeDarker,
     },
     appLogo: {
-      display: 'inline-block',
-      marginRight: 5,
+      maxWidth: 200,
+    },
+    gitHubLink: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 32,
+      height: 32,
+      ...theme.fonts.large,
     },
   };
 });

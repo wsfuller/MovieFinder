@@ -4,7 +4,7 @@ const useGenreStyles = makeStyles((theme) => ({
   root: {
     margin: `${theme.spacing.s2} 0`,
     padding: `0 0 ${theme.spacing.s1}`,
-    overflowX: 'scroll',
+    overflowX: 'auto',
     selectors: {
       li: {
         padding: `0 ${theme.spacing.s1}`,

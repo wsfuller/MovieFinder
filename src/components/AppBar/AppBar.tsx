@@ -1,33 +1,36 @@
 import React from 'react';
+import { AiOutlineGithub } from 'react-icons/ai';
 
-import { Stack, Text, Toggle } from '@fluentui/react';
+import { Link, Stack } from '@fluentui/react';
 
 import useAppBarStyles from './AppBar.styles';
-import { SET_APP_THEME } from '../../redux/appTheme/appTheme.types';
+import Settings from './Settings';
 
-import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import { useAppSelector } from '../../utils/hooks';
+
+import MovieFinderLogoDark from '../../assets/images/movie-finder-logo-dark.svg';
+import MovieFinderLogoLight from '../../assets/images/movie-finder-logo-light.svg';
 
 const AppBar: React.FC = () => {
   const classes = useAppBarStyles();
-  const appDispatch = useAppDispatch();
-  const {
-    appTheme: { isDarkMode },
-  } = useAppSelector((state) => state);
+  const { isDarkMode } = useAppSelector((state) => state.appTheme);
+  const appLogo = isDarkMode ? MovieFinderLogoLight : MovieFinderLogoDark;
 
   return (
-    <Stack as="header" className={classes.root} horizontal horizontalAlign="space-between" verticalAlign="center">
-      <Stack.Item>
-        <Text as="p">AppBar</Text>
-      </Stack.Item>
-      <Stack.Item>
-        <Toggle
-          label="Enable Dark Mode"
-          onText="Dark Mode"
-          offText="Light Mode"
-          defaultChecked={isDarkMode}
-          onChange={() => appDispatch({ type: SET_APP_THEME, payload: !isDarkMode })}
-        />
-      </Stack.Item>
+    <Stack as="header" className={classes.root}>
+      <Stack className="grid-container" horizontal horizontalAlign="space-between" verticalAlign="center">
+        <Stack.Item>
+          <img className={classes.appLogo} src={appLogo} alt="movie finder logo" />
+        </Stack.Item>
+        <Stack.Item>
+          <Stack horizontal horizontalAlign="center">
+            <Settings />
+            <Link className={classes.gitHubLink} href="https://github.com/wsfuller/MovieFinder" target="_blank">
+              <AiOutlineGithub />
+            </Link>
+          </Stack>
+        </Stack.Item>
+      </Stack>
     </Stack>
   );
 };
