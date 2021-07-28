@@ -49,6 +49,7 @@ const Search: React.FC = () => {
           <Stack.Item>
             <div className={classes.modalBody}>
               <SearchBox placeholder="Search for movies" underlined onSearch={(newValue) => onSearch(newValue)} />
+              {movies.isLoading && <p>Loading Movies...</p>}
             </div>
           </Stack.Item>
         </Stack>
