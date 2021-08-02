@@ -15,6 +15,9 @@ const useSearchStyles = makeStyles((theme) => {
     modalBody: {
       padding: `${theme.spacing.s2} ${theme.spacing.m}`,
     },
+    searchInput: {
+      marginBottom: theme.spacing.l1,
+    },
   };
 });
 

@@ -1,5 +1,11 @@
 import { IMovieResults } from './searchResults';
-import { GET_SEARCH_MOVIES, SearchDispatchTypes } from './searchActions.types';
+import {
+  GET_SEARCH_MOVIES,
+  GET_SEARCH_MOVIES_SUCCESSFUL,
+  GET_SEARCH_MOVIES_FAILED,
+  CLEAR_SEARCH_MOVIES,
+  SearchDispatchTypes,
+} from './searchActions.types';
 
 interface ISearchState {
   movies: {
@@ -26,6 +32,35 @@ const searchReducer = (state: ISearchState = initialState, action: SearchDispatc
           isLoading: true,
           results: initialState.movies.results,
           error: initialState.movies.error,
+        },
+      };
+    }
+    case GET_SEARCH_MOVIES_SUCCESSFUL: {
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          isLoading: false,
+          results: action.payload,
+        },
+      };
+    }
+    case GET_SEARCH_MOVIES_FAILED: {
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          isLoading: false,
+          error: action.payload,
+        },
+      };
+    }
+    case CLEAR_SEARCH_MOVIES: {
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          results: initialState.movies.results,
         },
       };
     }

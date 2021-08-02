@@ -1,12 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 import axios, { AxiosResponse } from 'axios';
-import { Action, Dispatch } from 'redux';
+import { Action, AnyAction, Dispatch } from 'redux';
 
 import { IMovieResults } from './searchResults';
 import {
   GET_SEARCH_MOVIES,
   GET_SEARCH_MOVIES_SUCCESSFUL,
   GET_SEARCH_MOVIES_FAILED,
+  CLEAR_SEARCH_MOVIES,
   SearchDispatchTypes,
 } from './searchActions.types';
 
@@ -20,8 +21,6 @@ export const searchMovies =
         `${process.env.REACT_APP_API_BASE_URL}search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchTerm}`
       );
 
-      console.log('data: ', data);
-
       return dispatch({
         type: GET_SEARCH_MOVIES_SUCCESSFUL,
         payload: data,
@@ -33,3 +32,8 @@ export const searchMovies =
       });
     }
   };
+
+export const clearSearchMovies =
+  () =>
+  (dispatch: Dispatch<SearchDispatchTypes>): AnyAction =>
+    dispatch({ type: CLEAR_SEARCH_MOVIES });

@@ -1,25 +1,55 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
+import isEmpty from 'lodash/isEmpty';
 
 import { useId, useBoolean } from '@fluentui/react-hooks';
-import { IconButton, Modal, SearchBox, Stack, Text } from '@fluentui/react';
+import { IconButton, Modal, Spinner, SearchBox, Stack, Text } from '@fluentui/react';
 
 import useSearchStyles from './Search.styles';
-import { searchMovies } from '../../../redux/search/searchActions';
+import { searchMovies, clearSearchMovies } from '../../../redux/search/searchActions';
+import SearchResults from './SearchResults';
 
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks';
 
 const Search: React.FC = () => {
   const [isSearchModalOpen, { setTrue: showModal, setFalse: hideModal }] = useBoolean(false);
+  const [hasRunSearch, setHasRunSearch] = useState<boolean>(false);
   const titleId = useId('title');
   const classes = useSearchStyles();
   const appDispatch = useAppDispatch();
   const { movies } = useAppSelector((state) => state.searchResults);
 
-  // console.log('MOVIES: ', movies);
+  const showNoResults = hasRunSearch && isEmpty(movies.results) && !movies.isLoading;
+  const showResults = !isEmpty(movies.results) && !movies.isLoading;
 
   const onSearch = (searchTerm: string) => {
+    setHasRunSearch(true);
     return appDispatch(searchMovies(searchTerm));
   };
+
+  const clearSearchResults = () => {
+    setHasRunSearch(false);
+    return appDispatch(clearSearchMovies());
+  };
+
+  let searchContent = null;
+
+  if (showNoResults) {
+    searchContent = (
+      <Text as="h4" variant="large" block>
+        No search results
+      </Text>
+    );
+  } else if (movies.isLoading) {
+    searchContent = <Spinner label="Searching..." ariaLive="assertive" labelPosition="left" />;
+  } else if (movies.error) {
+    searchContent = (
+      <Text as="h4" variant="large" block>
+        Error searching for movies
+      </Text>
+    );
+  } else if (showResults) {
+    searchContent = <SearchResults movies={movies.results.results} />;
+  }
 
   return (
     <Fragment>
@@ -34,6 +64,7 @@ const Search: React.FC = () => {
         titleAriaId={titleId}
         isOpen={isSearchModalOpen}
         onDismiss={hideModal}
+        onDismissed={clearSearchResults}
         isBlocking={false}
         containerClassName={classes.modal}
       >
@@ -48,8 +79,13 @@ const Search: React.FC = () => {
           </Stack.Item>
           <Stack.Item>
             <div className={classes.modalBody}>
-              <SearchBox placeholder="Search for movies" underlined onSearch={(newValue) => onSearch(newValue)} />
-              {movies.isLoading && <p>Loading Movies...</p>}
+              <SearchBox
+                className={classes.searchInput}
+                placeholder="Search for movies"
+                underlined
+                onSearch={(newValue) => onSearch(newValue)}
+              />
+              {searchContent}
             </div>
           </Stack.Item>
         </Stack>
