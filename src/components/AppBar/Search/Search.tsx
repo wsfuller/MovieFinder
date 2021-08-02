@@ -18,8 +18,8 @@ const Search: React.FC = () => {
   const appDispatch = useAppDispatch();
   const { movies } = useAppSelector((state) => state.searchResults);
 
-  const showNoResults = hasRunSearch && isEmpty(movies.results) && !movies.isLoading;
-  const showResults = !isEmpty(movies.results) && !movies.isLoading;
+  const showNoResults = hasRunSearch && isEmpty(movies.results.results) && !movies.isLoading;
+  const showResults = !isEmpty(movies.results.results) && !movies.isLoading;
 
   const onSearch = (searchTerm: string) => {
     setHasRunSearch(true);
@@ -66,7 +66,8 @@ const Search: React.FC = () => {
         onDismiss={hideModal}
         onDismissed={clearSearchResults}
         isBlocking={false}
-        containerClassName={classes.modal}
+        containerClassName={classes.modalContainer}
+        scrollableContentClassName={classes.modalContent}
       >
         <Stack>
           <Stack.Item>
