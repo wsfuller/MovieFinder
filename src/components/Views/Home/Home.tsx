@@ -4,16 +4,18 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Stack } from '@fluentui/react';
 
-import { getNowPlayingMovies, getPopularMovies, getUpcomingMovies } from '../../redux/movies/moviesActions';
+import { getNowPlayingMovies, getPopularMovies, getUpcomingMovies } from '../../../redux/movies/moviesActions';
 
-import { Loading, Empty, Error } from '../ContentStates';
-import Section from '../Section';
-import MoviesCarousel from '../MoviesCarousel';
+import useHomeStyles from './Home.styles';
+import { Loading, Empty, Error } from '../../ContentStates';
+import Section from '../../Section';
+import MoviesCarousel from '../../MoviesCarousel';
 
-import { useAppDispatch, useAppSelector } from '../../utils/hooks';
-import { sortMoviesBy, SortMoviesBy } from '../../utils/helpers';
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks';
+import { sortMoviesBy, SortMoviesBy } from '../../../utils/helpers';
 
 const HomeView: React.FC = () => {
+  const classes = useHomeStyles();
   const appDispatch = useAppDispatch();
   const {
     movies: { nowPlaying, popular, upcoming },
@@ -88,15 +90,21 @@ const HomeView: React.FC = () => {
   }
 
   return (
-    <Stack>
+    <Stack className="grid-container">
       <Stack.Item>
-        <Section title="Now Playing">{nowPlayingMoviesContent}</Section>
+        <Section title="Now Playing" contentClassName={classes.sectionContent}>
+          {nowPlayingMoviesContent}
+        </Section>
       </Stack.Item>
       <Stack.Item>
-        <Section title="Upcoming">{upcomingMoviesContent}</Section>
+        <Section title="Upcoming" contentClassName={classes.sectionContent}>
+          {upcomingMoviesContent}
+        </Section>
       </Stack.Item>
       <Stack.Item>
-        <Section title="Popular">{popularMoviesContent}</Section>
+        <Section title="Popular" contentClassName={classes.sectionContent}>
+          {popularMoviesContent}
+        </Section>
       </Stack.Item>
     </Stack>
   );
