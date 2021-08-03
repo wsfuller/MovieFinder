@@ -27,7 +27,12 @@ const AppBar: React.FC = () => {
           <Stack horizontal horizontalAlign="center">
             <Search />
             <Settings />
-            <Link className={classes.gitHubLink} href="https://github.com/wsfuller/MovieFinder" target="_blank">
+            <Link
+              className={classes.gitHubLink}
+              href="https://github.com/wsfuller/MovieFinder"
+              target="_blank"
+              aria-label="MovieFinder GitHub repo"
+            >
               <AiOutlineGithub />
             </Link>
           </Stack>

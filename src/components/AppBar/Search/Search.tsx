@@ -54,7 +54,7 @@ const Search: React.FC = () => {
   return (
     <Fragment>
       <IconButton
-        id="settingsButton"
+        id="searchButton"
         iconProps={{ iconName: 'Search' }}
         title="Movie search"
         ariaLabel="Movie search"
