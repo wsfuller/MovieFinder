@@ -4,6 +4,7 @@ const useAppFooterStyles = makeStyles((theme) => {
   return {
     root: {
       width: '100%',
+      marginTop: theme.spacing.l2,
       padding: `${theme.spacing.l2} ${theme.spacing.m}`,
       backgroundColor: theme.palette.neutralLight,
     },

@@ -41,6 +41,8 @@ const App: React.FC = () => {
         onDismiss={() => appDispatch(closePanel())}
         onDismissed={() => appDispatch(clearSelectedMovie())}
         closeButtonAriaLabel="Close"
+        isLightDismiss
+        overlayProps={{ isDarkThemed: isDarkMode }}
       >
         <MovieDetailsPanel movieId={panels.movieId} />
       </Panel>

@@ -1,8 +1,13 @@
-interface IMoviePoster {
+export interface IMoviePosterProps {
   image: {
-    source: string;
+    source: string | null;
     alt: string;
+    width: number;
   };
 }
 
-export default IMoviePoster;
+export const defaultProps = {
+  image: {
+    width: 200,
+  },
+};

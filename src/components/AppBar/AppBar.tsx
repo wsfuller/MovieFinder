@@ -5,6 +5,7 @@ import { Link, Stack } from '@fluentui/react';
 
 import useAppBarStyles from './AppBar.styles';
 import Settings from './Settings';
+import Search from './Search';
 
 import { useAppSelector } from '../../utils/hooks';
 
@@ -24,6 +25,7 @@ const AppBar: React.FC = () => {
         </Stack.Item>
         <Stack.Item>
           <Stack horizontal horizontalAlign="center">
+            <Search />
             <Settings />
             <Link className={classes.gitHubLink} href="https://github.com/wsfuller/MovieFinder" target="_blank">
               <AiOutlineGithub />

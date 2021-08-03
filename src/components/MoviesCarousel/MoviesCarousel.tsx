@@ -21,7 +21,7 @@ const MoviesCarousel: React.FC<IMoviesCarouselProps> = ({ movies }) => {
   return (
     <Swiper
       spaceBetween={themeSpacingNumber(theme.spacing.m)}
-      slidesPerView={1}
+      slidesPerView={2}
       breakpoints={{
         [breakpoints.medium]: {
           slidesPerView: 2,
@@ -49,8 +49,9 @@ const MoviesCarousel: React.FC<IMoviesCarouselProps> = ({ movies }) => {
           {movie.poster_path && (
             <MoviePoster
               image={{
-                source: `${process.env.REACT_APP_IMAGE_URL}w300${movie.poster_path}`,
+                source: movie.poster_path,
                 alt: movie.title,
+                width: 500,
               }}
             />
           )}

@@ -23,8 +23,8 @@ const Settings: React.FC = () => {
       <IconButton
         id="settingsButton"
         iconProps={{ iconName: 'Settings' }}
-        title="User Preferences"
-        ariaLabel="User Preferences"
+        title="Settings"
+        ariaLabel="Settings"
         onClick={toggleIsCalloutVisible}
       />
       {isCalloutVisible && (
