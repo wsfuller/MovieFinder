@@ -3,7 +3,7 @@ import { makeStyles } from '@fluentui/react';
 const useGenreStyles = makeStyles((theme) => ({
   root: {
     margin: `${theme.spacing.s2} 0`,
-    padding: `0 0 ${theme.spacing.s1}`,
+    padding: 0,
     overflowX: 'auto',
     selectors: {
       li: {

@@ -8,6 +8,7 @@ import useMovieDetailsPanelStyles from './MovieDetailsPanel.styles';
 import { getMovie } from '../../redux/movies/moviesActions';
 import TopBanner from './TopBanner';
 import Genres from './Genres';
+import WatchLater from './WatchLater';
 import Title from './Title';
 import Tagline from './Tagline';
 import Overview from './Overview';
@@ -53,7 +54,10 @@ const MovieDetailsPanel: React.FC<IMovieDetailsPanelProps> = ({ movieId }) => {
         <TopBanner movieTitle={movie.title} backdropPath={movie.backdrop_path} />
         <Stack className={classes.bodyContent}>
           <Stack.Item>
-            <Genres genres={movie.genres} />
+            <Stack horizontal verticalAlign="center">
+              <WatchLater />
+              <Genres genres={movie.genres} />
+            </Stack>
           </Stack.Item>
           <Stack.Item>
             <Title title={movie.title} />

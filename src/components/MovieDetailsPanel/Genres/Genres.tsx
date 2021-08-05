@@ -9,7 +9,7 @@ const Genres: React.FC<IGenres> = ({ genres }) => {
   const classes = useGenreStyles();
 
   return (
-    <Stack as="ul" className={classes.root} horizontal>
+    <Stack as="ul" className={classes.root} horizontal verticalAlign="center">
       {genres.map((genre) => (
         <li key={genre.id}>{genre.name}</li>
       ))}

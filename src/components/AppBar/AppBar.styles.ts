@@ -13,7 +13,9 @@ const useAppBarStyles = makeStyles((theme) => {
       color: theme.palette.themeDarker,
     },
     appLogo: {
+      width: '100%',
       maxWidth: 200,
+      height: 'auto',
     },
     gitHubLink: {
       display: 'flex',

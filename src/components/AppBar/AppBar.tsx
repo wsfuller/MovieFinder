@@ -6,6 +6,7 @@ import { Link, Stack } from '@fluentui/react';
 import useAppBarStyles from './AppBar.styles';
 import Settings from './Settings';
 import Search from './Search';
+import WatchLaterList from './WatchLaterList';
 
 import { useAppSelector } from '../../utils/hooks';
 
@@ -26,6 +27,7 @@ const AppBar: React.FC = () => {
         <Stack.Item>
           <Stack horizontal horizontalAlign="center">
             <Search />
+            <WatchLaterList />
             <Settings />
             <Link
               className={classes.gitHubLink}

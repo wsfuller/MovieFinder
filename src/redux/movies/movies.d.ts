@@ -82,3 +82,8 @@ export interface IUpcomingMovies {
   total_pages: number;
   total_results: number;
 }
+
+export interface IWatchLaterItem {
+  id: number;
+  title: string;
+}
