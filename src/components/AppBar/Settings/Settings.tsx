@@ -40,6 +40,7 @@ const Settings: React.FC = () => {
         >
           <Text variant="xLarge">Settings</Text>
           <Toggle
+            id="theme-toggle"
             label="Toggle View Mode"
             onText="Dark Mode"
             offText="Light Mode"

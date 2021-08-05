@@ -49,7 +49,7 @@ const HomeView: React.FC = () => {
       },
       nowPlaying.data.results
     );
-    nowPlayingMoviesContent = <MoviesCarousel movies={sortedNowPlayingMovies} />;
+    nowPlayingMoviesContent = <MoviesCarousel movies={sortedNowPlayingMovies} carouselName="Now Playing" />;
   } else if (!nowPlaying.isLoading && !hasNowPlayingMovies) {
     nowPlayingMoviesContent = <Empty text="Sorry, but no now playing movies to display" />;
   }
@@ -67,7 +67,7 @@ const HomeView: React.FC = () => {
       popular.data.results
     );
 
-    popularMoviesContent = <MoviesCarousel movies={sortedPopularMovies} />;
+    popularMoviesContent = <MoviesCarousel movies={sortedPopularMovies} carouselName="Popular" />;
   } else if (!popular.isLoading && !hasPopularMovies) {
     popularMoviesContent = <Empty text="Sorry, but no popular movies to display" />;
   }
@@ -84,7 +84,7 @@ const HomeView: React.FC = () => {
       },
       upcoming.data.results
     );
-    upcomingMoviesContent = <MoviesCarousel movies={sortedUpcomingMovies} />;
+    upcomingMoviesContent = <MoviesCarousel movies={sortedUpcomingMovies} carouselName="Upcoming" />;
   } else if (!upcoming.isLoading && !hasUpcomingMovies) {
     upcomingMoviesContent = <Empty text="Sorry, but no upcoming movies to display" />;
   }
