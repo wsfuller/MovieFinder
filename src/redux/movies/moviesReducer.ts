@@ -209,7 +209,7 @@ const moviesReducer = (state: IMoviesState = initialState, action: MoviesDispatc
     }
     case ADD_WATCH_LATER_MOVIES: {
       const combinedWatchLaterMovies = unionBy(state.watchLater, action.payload);
-      console.log('combinedWatchLaterMovies: ', combinedWatchLaterMovies);
+
       return {
         ...state,
         watchLater: combinedWatchLaterMovies,
