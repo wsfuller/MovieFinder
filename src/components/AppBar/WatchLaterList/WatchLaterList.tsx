@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
 import { useId, useBoolean } from '@fluentui/react-hooks';
-import { IconButton, Modal, Stack, Text } from '@fluentui/react';
+import { Icon, IconButton, Modal, Stack, Text } from '@fluentui/react';
 
 import useWatchLaterListStyles from './WatchLaterList.styles';
 
@@ -46,9 +46,15 @@ const WatchLaterList: React.FC = () => {
           <Stack.Item>
             <div className={classes.modalBody}>
               {isEmpty(watchLater) && (
-                <Text as="h4" variant="large" block>
-                  No movies have been added to the watch later list
-                </Text>
+                <Stack.Item>
+                  <Text as="h4" variant="large" block>
+                    No movies have been added
+                  </Text>
+                  <Text as="p" variant="mediumPlus" block>
+                    You can add movies to watch later by pressing the{' '}
+                    <Icon className={classes.watchLaterIcon} iconName="AlarmClock" /> in any movie details panel
+                  </Text>
+                </Stack.Item>
               )}
               {!isEmpty(watchLater) && (
                 <ul className={classes.list}>

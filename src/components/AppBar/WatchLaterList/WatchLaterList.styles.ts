@@ -22,6 +22,10 @@ const useWatchLaterListStyles = makeStyles((theme) => {
         minHeight: 300,
       },
     },
+    watchLaterIcon: {
+      margin: `0 ${theme.spacing.s1}`,
+      color: theme.palette.themePrimary,
+    },
     list: {
       padding: 0,
       listStyle: 'none',
