@@ -4,12 +4,17 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Stack } from '@fluentui/react';
 
-import { getNowPlayingMovies, getPopularMovies, getUpcomingMovies } from '../../../redux/movies/moviesActions';
-
 import useHomeStyles from './Home.styles';
 import { Loading, Empty, Error } from '../../ContentStates';
 import Section from '../../Section';
 import MoviesCarousel from '../../MoviesCarousel';
+
+import {
+  getNowPlayingMovies,
+  getPopularMovies,
+  getUpcomingMovies,
+  addWatchLaterMovies,
+} from '../../../redux/movies/moviesActions';
 
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks';
 import { sortMoviesBy, SortMoviesBy } from '../../../utils/helpers';
@@ -22,10 +27,15 @@ const HomeView: React.FC = () => {
   } = useAppSelector((state) => state);
 
   useEffect(() => {
+    const movieFinderStorage = localStorage.getItem('MovieFinder');
     batch(() => {
       appDispatch(getNowPlayingMovies());
       appDispatch(getPopularMovies());
       appDispatch(getUpcomingMovies());
+      if (movieFinderStorage) {
+        const { watchLater } = JSON.parse(movieFinderStorage);
+        appDispatch(addWatchLaterMovies(watchLater));
+      }
     });
   }, [appDispatch]);
 

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Action, Dispatch } from 'redux';
 
-import { INowPlayingMovies, IPopularMovies, IUpcomingMovies, IMovie } from './movies';
+import { INowPlayingMovies, IPopularMovies, IUpcomingMovies, IMovie, IWatchLaterItem } from './movies';
 
 import {
   MoviesDispatchTypes,
@@ -18,6 +18,9 @@ import {
   GET_MOVIE_SUCCESSFUL,
   GET_MOVIE_FAILED,
   CLEAR_SELECTED_MOVIE,
+  ADD_WATCH_LATER_MOVIES,
+  ADD_WATCH_LATER_MOVIE,
+  REMOVE_WATCH_LATER_MOVIE,
 } from './moviesActions.types';
 
 export const getNowPlayingMovies =
@@ -135,4 +138,42 @@ export const clearSelectedMovie =
   () =>
   (dispatch: Dispatch<MoviesDispatchTypes>): Action => {
     return dispatch({ type: CLEAR_SELECTED_MOVIE });
+  };
+
+export const addWatchLaterMovies =
+  (movies: IWatchLaterItem[]) =>
+  (dispatch: Dispatch<MoviesDispatchTypes>): Action => {
+    return dispatch({ type: ADD_WATCH_LATER_MOVIES, payload: movies });
+  };
+
+export const addWatchLaterMovie =
+  (movieId: number, title: string) =>
+  (dispatch: Dispatch<MoviesDispatchTypes>): Action => {
+    const movieFinderStorage = localStorage.getItem('MovieFinder');
+
+    if (movieFinderStorage) {
+      const { watchLater } = JSON.parse(movieFinderStorage);
+      const updatedCache = [...watchLater, { id: movieId, title }];
+
+      localStorage.setItem('MovieFinder', JSON.stringify({ watchLater: updatedCache }));
+    } else {
+      localStorage.setItem('MovieFinder', JSON.stringify({ watchLater: [{ id: movieId, title }] }));
+    }
+
+    return dispatch({ type: ADD_WATCH_LATER_MOVIE, payload: { id: movieId, title } });
+  };
+
+export const removeWatchLaterMovie =
+  (movieId: number) =>
+  (dispatch: Dispatch<MoviesDispatchTypes>): Action => {
+    const movieFinderStorage = localStorage.getItem('MovieFinder');
+
+    if (movieFinderStorage) {
+      const { watchLater } = JSON.parse(movieFinderStorage);
+      const updatedCache = [...watchLater].filter(({ id }) => id !== movieId);
+
+      localStorage.setItem('MovieFinder', JSON.stringify({ watchLater: updatedCache }));
+    }
+
+    return dispatch({ type: REMOVE_WATCH_LATER_MOVIE, payload: movieId });
   };

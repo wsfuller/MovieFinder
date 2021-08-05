@@ -1,4 +1,6 @@
-import { IMovie, INowPlayingMovies, IPopularMovies, IUpcomingMovies } from './movies';
+import unionBy from 'lodash/unionBy';
+
+import { IMovie, INowPlayingMovies, IPopularMovies, IUpcomingMovies, IWatchLaterItem } from './movies';
 import {
   MoviesDispatchTypes,
   GET_NOW_PLAYING_MOVIES,
@@ -14,9 +16,13 @@ import {
   GET_MOVIE_SUCCESSFUL,
   GET_MOVIE_FAILED,
   CLEAR_SELECTED_MOVIE,
+  ADD_WATCH_LATER_MOVIES,
+  ADD_WATCH_LATER_MOVIE,
+  REMOVE_WATCH_LATER_MOVIE,
 } from './moviesActions.types';
 
 interface IMoviesState {
+  watchLater: IWatchLaterItem[];
   selected: {
     isLoading: boolean;
     data: IMovie;
@@ -40,6 +46,7 @@ interface IMoviesState {
 }
 
 const initialState: IMoviesState = {
+  watchLater: [],
   selected: {
     isLoading: false,
     data: {} as IMovie,
@@ -198,6 +205,27 @@ const moviesReducer = (state: IMoviesState = initialState, action: MoviesDispatc
           data: initialState.selected.data,
           error: initialState.selected.error,
         },
+      };
+    }
+    case ADD_WATCH_LATER_MOVIES: {
+      const combinedWatchLaterMovies = unionBy(state.watchLater, action.payload);
+
+      return {
+        ...state,
+        watchLater: combinedWatchLaterMovies,
+      };
+    }
+    case ADD_WATCH_LATER_MOVIE: {
+      return {
+        ...state,
+        watchLater: [...state.watchLater, action.payload],
+      };
+    }
+    case REMOVE_WATCH_LATER_MOVIE: {
+      const filteredWatchLater = [...state.watchLater].filter(({ id }) => id !== action.payload);
+      return {
+        ...state,
+        watchLater: filteredWatchLater,
       };
     }
     default: {
