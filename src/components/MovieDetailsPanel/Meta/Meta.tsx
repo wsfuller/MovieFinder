@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import dayjs from 'dayjs';
 import { SiImdb } from 'react-icons/si';
+import TagManager from 'react-gtm-module';
 
 import { useTheme, Icon, Link, Stack, Text } from '@fluentui/react';
 
@@ -66,7 +67,20 @@ const Meta: React.FC<IMetaProps> = ({
       <Stack horizontal tokens={{ childrenGap: theme.spacing.m }}>
         {homepage && (
           <Stack.Item>
-            <Link href={homepage} target="_blank">
+            <Link
+              className={classes.iconLink}
+              href={homepage}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                TagManager.dataLayer({
+                  dataLayer: {
+                    event: 'click-external-link',
+                    label: homepage,
+                  },
+                })
+              }
+            >
               <Icon iconName="Website" className={classes.icon} />
               <Icon iconName="NavigateExternalInline" />
             </Link>
@@ -74,7 +88,20 @@ const Meta: React.FC<IMetaProps> = ({
         )}
         {imdbId && (
           <Stack.Item>
-            <Link href={`https://imdb.com/title/${imdbId}`} target="_blank">
+            <Link
+              className={classes.iconLink}
+              href={`https://imdb.com/title/${imdbId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                TagManager.dataLayer({
+                  dataLayer: {
+                    event: 'click-external-link',
+                    label: `https://imdb.com/title/${imdbId}`,
+                  },
+                })
+              }
+            >
               <SiImdb className={classes.icon} />
               <Icon iconName="NavigateExternalInline" />
             </Link>

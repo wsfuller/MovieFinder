@@ -1,5 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import TagManager from 'react-gtm-module';
+import dayjs from 'dayjs';
 
 import { useTheme } from '@fluentui/react';
 
@@ -12,7 +14,7 @@ import PanelContentTypes from '../../redux/panels/panelContentTypes';
 import { themeSpacingNumber } from '../../utils/helpers';
 import { useAppDispatch, useBreakpoints } from '../../utils/hooks';
 
-const MoviesCarousel: React.FC<IMoviesCarouselProps> = ({ movies }) => {
+const MoviesCarousel: React.FC<IMoviesCarouselProps> = ({ movies, carouselName }) => {
   const theme = useTheme();
   const appDispatch = useAppDispatch();
   const breakpoints = useBreakpoints();
@@ -44,7 +46,17 @@ const MoviesCarousel: React.FC<IMoviesCarouselProps> = ({ movies }) => {
         <SwiperSlide
           key={movie.id}
           className={classes.slide}
-          onClick={() => appDispatch(openPanel({ panelContentType: PanelContentTypes.Movie, movieId: movie.id }))}
+          onClick={() => {
+            TagManager.dataLayer({
+              dataLayer: {
+                event: 'click-carousel-movie',
+                category: 'Carousels',
+                action: `click - ${carouselName.toLowerCase()} movie poster`,
+                label: `${movie.title} (${dayjs(movie.release_date).format('YYYY')})`,
+              },
+            });
+            appDispatch(openPanel({ panelContentType: PanelContentTypes.Movie, movieId: movie.id }));
+          }}
         >
           {movie.poster_path && (
             <MoviePoster

@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import isEmpty from 'lodash/isEmpty';
+import TagManager from 'react-gtm-module';
 
 import { useId, useBoolean } from '@fluentui/react-hooks';
 import { IconButton, Modal, Spinner, SearchBox, Stack, Text } from '@fluentui/react';
@@ -21,8 +22,16 @@ const Search: React.FC = () => {
   const showNoResults = hasRunSearch && isEmpty(movies.results.results) && !movies.isLoading;
   const showResults = !isEmpty(movies.results.results) && !movies.isLoading;
 
-  const onSearch = (searchTerm: string) => {
+  const handleSearch = (searchTerm: string) => {
     setHasRunSearch(true);
+    TagManager.dataLayer({
+      dataLayer: {
+        event: 'search-movie',
+        category: 'Search',
+        action: `search - movie`,
+        label: searchTerm,
+      },
+    });
     return appDispatch(searchMovies(searchTerm));
   };
 
@@ -84,7 +93,7 @@ const Search: React.FC = () => {
                 className={classes.searchInput}
                 placeholder="Search for movies"
                 underlined
-                onSearch={(newValue) => onSearch(newValue)}
+                onSearch={(newValue) => handleSearch(newValue)}
               />
               {searchContent}
             </div>

@@ -34,6 +34,9 @@ const useMetaStyles = makeStyles((theme) => {
     icon: {
       fontSize: theme.fonts.superLarge.fontSize,
     },
+    iconLink: {
+      display: 'inline-block',
+    },
   };
 });
 

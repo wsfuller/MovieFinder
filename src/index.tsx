@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import TagManager from 'react-gtm-module';
 import SwiperCore, { Navigation } from 'swiper/core';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -15,6 +16,11 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 import './index.css';
 
+const tagManagerConfig = {
+  gtmId: 'GTM-TV33SWZ',
+};
+
+TagManager.initialize(tagManagerConfig);
 initializeIcons();
 SwiperCore.use([Navigation]);
 dayjs.extend(localizedFormat);
